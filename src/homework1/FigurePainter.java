@@ -64,8 +64,7 @@ public class FigurePainter {
                 System.out.print(" ");
             }
             for (int k = 4; k > i; k--) {
-                System.out.print(" ");
-                System.out.print("*");
+                System.out.print(" *");
             }
             System.out.println();
         }
