@@ -19,4 +19,5 @@ public class BoolLogic {
         System.out.println("!a & b | a & !b = " + f);
         System.out.println("!a = " + g);
     }
+
 }
