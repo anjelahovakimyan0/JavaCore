@@ -11,6 +11,7 @@ public class ForExamples {
         }
 
         System.out.println();
+        System.out.println();
 
         for (int i = 1; i <= 100; i++) {
             if (i % 2 == 0) {
@@ -18,6 +19,7 @@ public class ForExamples {
             }
         }
 
+        System.out.println();
         System.out.println();
 
         int[] array = {2, 5, 8, 4, 9, 3, 7};
