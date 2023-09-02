@@ -23,7 +23,7 @@ public class ForExamples {
         int[] array = {2, 5, 8, 4, 9, 3, 7};
         int max = array[0];
 
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 1; i < array.length; i++) {
             if (max < array[i]) {
                 max = array[i];
             }
