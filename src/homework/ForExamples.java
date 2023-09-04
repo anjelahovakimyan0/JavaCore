@@ -1,11 +1,12 @@
-package homework.homework2;
+package homework;
 
 public class ForExamples {
 
     public static void main(String[] args) {
-        for (int i = 1; i <= 1000; i++) {
+        int count = 1000;
+        for (int i = 1; i <= count; i++) {
             System.out.print(i);
-            if (i != 1000) {
+            if (i != count) {
                 System.out.print("-");
             }
         }
@@ -24,7 +25,7 @@ public class ForExamples {
         int max = array[0];
 
         for (int i = 1; i < array.length; i++) {
-            if (max < array[i]) {
+            if (array[i] > max) {
                 max = array[i];
             }
         }
