@@ -9,5 +9,6 @@ public class DoWhile {
             System.out.println("тактов " + n);
             n--;
         } while (n > 0);
+
     }
 }
