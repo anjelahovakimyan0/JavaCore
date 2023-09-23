@@ -13,6 +13,7 @@ public class DynamicArray {
     }
 
     int getByIndex(int index) {
+        System.out.print("Get value by index ");
         if (index >= size || index < 0) {
             return 0;
         }
@@ -20,12 +21,14 @@ public class DynamicArray {
     }
 
     void print() {
+        System.out.print("All numbers: ");
         for (int i = 0; i < size; i++) {
             System.out.print(array[i] + " ");
         }
     }
 
     public void deleteByIndex(int index) {
+        System.out.println("Delete value by index " + index);
         if (index > 0 && index < size) {
             for (int i = 0; i < size; i++) {
                 if (index == i) {
@@ -42,6 +45,7 @@ public class DynamicArray {
     }
 
     public void set(int index, int value) {
+        System.out.println("Set value " + value + ", index " + index);
         if (index > 0 && index < size) {
             for (int i = 0; i < size; i++) {
                 if (index == i) {
@@ -55,6 +59,7 @@ public class DynamicArray {
     }
 
     public void add(int index, int value) {
+        System.out.println("Add value " + value + ", index " + index);
         if (index > 0 && index < size) {
             for (int i = 0; i < size; i++) {
                 if (index == size - 1) {
@@ -71,6 +76,7 @@ public class DynamicArray {
     }
 
     public boolean exists(int value) {
+        System.out.print("Value " + value +  " exists? ");
         for (int i = 0; i < size; i++) {
             if (array[i] == value) {
                 return true;
@@ -80,6 +86,7 @@ public class DynamicArray {
     }
 
     public int getIndexByValue(int value) {
+        System.out.print("Get index by value ");
         for (int i = 0; i < size; i++) {
             if (array[i] == value) {
                 return i;
