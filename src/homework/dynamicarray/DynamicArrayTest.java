@@ -28,17 +28,25 @@ public class DynamicArrayTest {
 
         dy.print();
 
+        System.out.println();
+
         dy.deleteByIndex(3);
 
         dy.print();
+
+        System.out.println();
 
         dy.set(1, 5000);
 
         dy.print();
 
+        System.out.println();
+
         dy.add(18, 5000);
 
         dy.print();
+
+        System.out.println();
 
         System.out.println(dy.exists(8000));
 

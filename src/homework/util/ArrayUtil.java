@@ -1,27 +1,26 @@
-package homework;
+package homework.util;
 
 public class ArrayUtil {
 
-    public static void main(String[] args) {
-        int[] numbers = {1, 6, 3, 9, 15, 52, -3, 5, 8};
-
-        //1
+    void print(int[] numbers) {
         for (int i = 0; i < numbers.length; i++) {
             System.out.print(numbers[i] + " ");
         }
+    }
 
-        System.out.println();
-
-        //2
+    void firstElement(int[] numbers) {
         System.out.println(numbers[0]);
+    }
 
-        //3
+    void lastElement(int[] numbers) {
         System.out.println(numbers[numbers.length - 1]);
+    }
 
-        //4
+    void arrayLength(int[] numbers) {
         System.out.println(numbers.length);
+    }
 
-        //5
+    void minValue(int[] numbers) {
         int min = numbers[0];
 
         for (int i = 1; i < numbers.length; i++) {
@@ -30,18 +29,20 @@ public class ArrayUtil {
             }
         }
         System.out.println(min);
+    }
 
-        //6
+    void middleValueOrValues(int[] numbers) {
         if (numbers.length <= 2) {
-            System.out.println("Can't print middle values.");
+            System.out.println("Can't print middle value.");
         } else if (numbers.length % 2 == 0) {
             System.out.print(numbers[numbers.length / 2 - 1] + " ");
             System.out.println(numbers[numbers.length / 2]);
         } else if (numbers.length % 2 != 0) {
             System.out.println(numbers[(numbers.length - 1) / 2]);
         }
+    }
 
-        //7
+    void countOfEvens(int[] numbers) {
         int count = 0;
 
         for (int i = 0; i < numbers.length; i++) {
@@ -50,9 +51,10 @@ public class ArrayUtil {
             }
         }
         System.out.println(count);
+    }
 
-        //8
-        count = 0;
+    void countOfOdds(int[] numbers) {
+        int count = 0;
 
         for (int i = 0; i < numbers.length; i++) {
             if (numbers[i] % 2 != 0) {
@@ -60,17 +62,19 @@ public class ArrayUtil {
             }
         }
         System.out.println(count);
+    }
 
-        //9
+    void sum(int[] numbers) {
         double sum = 0;
 
         for (int i = 0; i < numbers.length; i++) {
             sum += numbers[i];
         }
         System.out.println(sum);
+    }
 
-        //10
-        sum = 0;
+    void average(int[] numbers) {
+        int sum = 0;
 
         for (int i = 0; i < numbers.length; i++) {
             sum += numbers[i];
@@ -78,3 +82,4 @@ public class ArrayUtil {
         System.out.println("Average = " + sum / numbers.length);
     }
 }
+
