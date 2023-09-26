@@ -3,8 +3,8 @@ package classwork.chapter6.stack;
 public class TestStack {
 
     public static void main(String[] args) {
-        Stack myStack1 = new Stack();
-        Stack myStack2 = new Stack();
+        Stack myStack1 = new Stack(10);
+        Stack myStack2 = new Stack(10);
 
         for (int i = 0; i < 10; i++) {
             myStack1.push(i);

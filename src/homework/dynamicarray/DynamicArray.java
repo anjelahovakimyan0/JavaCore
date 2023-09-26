@@ -2,14 +2,29 @@ package homework.dynamicarray;
 
 public class DynamicArray {
 
-    int[] array = new int[10];
-    int size = 0;
+    private int[] array = new int[10];
+    private int size = 0;
 
     void add(int value) {
         if (size == array.length) {
             extend();
         }
         array[size++] = value;
+    }
+
+    public void add(int index, int value) {
+        if (index < 0 || index > size) {
+            System.out.println("Index is incorrect");
+            return;
+        }
+        if (size == array.length) {
+            extend();
+        }
+        for (int i = size - 1; i >= index; i--) {
+            array[i + 1] = array[i];
+        }
+        array[index] = value;
+        size++;
     }
 
     int getByIndex(int index) {
@@ -23,48 +38,23 @@ public class DynamicArray {
         for (int i = 0; i < size; i++) {
             System.out.print(array[i] + " ");
         }
+        System.out.println();
     }
 
     public void deleteByIndex(int index) {
-        if (index > 0 && index < size) {
-            for (int i = 0; i < size; i++) {
-                if (index == i) {
-                    for (int j = i + 1; j < size; j++) {
-                        array[j - 1] = array[j];
-                    }
-                    size--;
-                    break;
-                }
+        if (index >= 0 && index < size) {
+            for (int i = index + 1; i < size; i++) {
+                array[i - 1] = array[i];
             }
+            size--;
         } else {
             System.out.println("Index is incorrect");
         }
     }
 
     public void set(int index, int value) {
-        if (index > 0 && index < size) {
-            for (int i = 0; i < size; i++) {
-                if (index == i) {
-                    array[index] = value;
-                    break;
-                }
-            }
-        } else {
-            System.out.println("Index is incorrect");
-        }
-    }
-
-    public void add(int index, int value) {
-        if (index > 0 && index < size) {
-            for (int i = 0; i < size; i++) {
-                if (index == size - 1) {
-                    array[index] = value;
-                } else if (index == i) {
-                    int tmp = array[index];
-                    array[index] = value;
-                    array[index + 1] = tmp;
-                }
-            }
+        if (index >= 0 && index < size) {
+            array[index] = value;
         } else {
             System.out.println("Index is incorrect");
         }
@@ -90,9 +80,7 @@ public class DynamicArray {
 
     private void extend() {
         int[] newArray = new int[array.length + 10];
-        for (int i = 0; i < size; i++) {
-            newArray[i] = array[i];
-        }
+        System.arraycopy(array, 0, newArray, 0, size);
         array = newArray;
     }
 }

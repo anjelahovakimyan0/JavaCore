@@ -1,4 +1,4 @@
-package classwork.chapter6.stack;
+package homework.bracechecker;
 
 public class Stack {
 
@@ -10,9 +10,17 @@ public class Stack {
         tos = -1;
     }
 
+    public int getSize() {
+        return tos;
+    }
+
+    public int[] getStck() {
+        return stck;
+    }
+
     void push(int item) {
         if (tos == stck.length - 1) {
-            System.out.println("Stack is full");
+            extend();
         } else {
             stck[++tos] = item;
         }
@@ -20,9 +28,16 @@ public class Stack {
 
     int pop() {
         if (tos < 0) {
-            System.out.println("Stack is empty");
             return 0;
         }
         return stck[tos--];
+    }
+
+    private void extend() {
+        int[] tmp = new int[stck.length + 10];
+        for (int i = 0; i < stck.length; i++) {
+            tmp[i] = stck[i];
+        }
+        stck = tmp;
     }
 }
