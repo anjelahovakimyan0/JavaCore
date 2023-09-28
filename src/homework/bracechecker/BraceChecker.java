@@ -4,7 +4,7 @@ public class BraceChecker {
 
     private String text;
     private Stack stck = new Stack(10);
-    int pop;
+    private int pop;
 
     public BraceChecker(String text) {
         this.text = text;
@@ -43,7 +43,6 @@ public class BraceChecker {
                         System.out.println("Error: Opened " + (char) pop + ", but closed " + c + " at " + i);
                     }
                     break;
-
             }
         }
         while (stck.getSize() >= 0) {
