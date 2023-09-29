@@ -2,14 +2,14 @@ package classwork.chapter6;
 
 public class Box {
 
-    double width;
-    double height;
-    double depth;
+    public double width;
+    public double height;
+    public double depth;
 
     Box() {
     }
 
-    Box(double width, double height, double depth) {
+    public Box(double width, double height, double depth) {
         System.out.println("Конструктирование объекта Box");
         this.width = width;
         this.height = height;
