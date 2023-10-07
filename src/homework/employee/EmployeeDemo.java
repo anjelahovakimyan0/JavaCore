@@ -46,7 +46,7 @@ public class EmployeeDemo {
 
     private static void changeByID(Scanner scanner, EmployeeStorage employeeStorage) {
         System.out.println("Please input employee ID");
-        String Id = scanner.nextLine();
+        String employeeID = scanner.nextLine();
 
         System.out.println("Please input employee name");
         String employeeName = scanner.nextLine();
@@ -63,7 +63,7 @@ public class EmployeeDemo {
         System.out.println("Please input employee position");
         String employeePosition = scanner.nextLine();
 
-        employeeStorage.changeEmployeeById(Id, employeeName,
+        employeeStorage.changeEmployeeById(employeeID, employeeName,
                 employeeSurname, employeeSalary, employeeCompany, employeePosition);
 
         System.out.println("Employee changed.");
@@ -71,8 +71,8 @@ public class EmployeeDemo {
 
     private static void deleteByID(Scanner scanner, EmployeeStorage employeeStorage) {
         System.out.println("Please input employee ID");
-        String employeeId = scanner.nextLine();
-        employeeStorage.deleteById(employeeId);
+        String employeeID = scanner.nextLine();
+        employeeStorage.deleteById(employeeID);
         System.out.println("Employee deleted.");
     }
 
@@ -84,8 +84,8 @@ public class EmployeeDemo {
 
     private static void searchByID(Scanner scanner, EmployeeStorage employeeStorage) {
         System.out.println("Please input employee ID");
-        String ID = scanner.nextLine();
-        employeeStorage.searchByID(ID);
+        String employeeID = scanner.nextLine();
+        employeeStorage.searchByID(employeeID);
     }
 
     private static void addEmployee(Scanner scanner, EmployeeStorage employeeStorage) {
@@ -110,7 +110,6 @@ public class EmployeeDemo {
         Employee employee = new Employee(name, surname, employeeID, salary, company, position);
         employeeStorage.add(employee);
         System.out.println("Employee created.");
-        System.out.println();
     }
 
     private static void printCommands() {
