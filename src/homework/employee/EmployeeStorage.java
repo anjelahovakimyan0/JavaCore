@@ -2,7 +2,7 @@ package homework.employee;
 
 public class EmployeeStorage {
 
-    private Employee[] employees = new Employee[10];
+    private Employee[] employees = new Employee[2];
     private int size;
 
     public void add(Employee employee) {
@@ -41,6 +41,30 @@ public class EmployeeStorage {
             }
         }
         System.out.println();
+    }
+
+    public void deleteById(String employeeID) {
+        for (int i = 0; i < size; i++) {
+            if (employees[i].getEmployeeID().equals(employeeID)) {
+                for (int j = i + 1; j < size; j++) {
+                    employees[j - 1] = employees[j];
+                }
+                size--;
+            }
+        }
+    }
+
+    public void changeEmployeeById(String employeeID, String name, String surname,
+                                   double salary, String company, String position) {
+        for (int i = 0; i < size; i++) {
+            if(employees[i].getEmployeeID().equals(employeeID)) {
+                employees[i].setName(name);
+                employees[i].setSurname(surname);
+                employees[i].setSalary(salary);
+                employees[i].setCompany(company);
+                employees[i].setPosition(position);
+            }
+        }
     }
 
     private void extend() {
