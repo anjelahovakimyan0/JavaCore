@@ -15,15 +15,15 @@ public class BookStorage {
     public void print() {
         System.out.println("------------------------");
         for (int i = 0; i < size; i++) {
-            System.out.println(books[i].getTitle() + " " + books[i].getAuthorName()
-                    + " " + books[i].getPrice() + " " + books[i].getCount());
+            System.out.println(books[i]);
         }
         System.out.println("------------------------");
     }
 
     public void search(String keyword) {
         for (int i = 0; i < size; i++) {
-            if (books[i].getTitle().contains(keyword) || books[i].getAuthorName().contains(keyword)) {
+            if (books[i].getTitle().toLowerCase().contains(keyword.toLowerCase())
+                    || books[i].getAuthorName().contains(keyword)) {
                 System.out.println(books[i].getTitle() + " " + books[i].getAuthorName()
                         + " " + books[i].getPrice() + " " + books[i].getCount());
             }
