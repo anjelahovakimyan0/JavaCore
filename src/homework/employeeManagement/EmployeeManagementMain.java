@@ -1,5 +1,10 @@
 package homework.employeeManagement;
 
+import homework.employeeManagement.model.Company;
+import homework.employeeManagement.model.Employee;
+import homework.employeeManagement.storage.CompanyStorage;
+import homework.employeeManagement.storage.EmployeeStorage;
+
 import java.util.Scanner;
 
 public class EmployeeManagementMain {
@@ -66,7 +71,6 @@ public class EmployeeManagementMain {
             return;
         }
         employeeStorage.searchEmployeesByCompany(companyFromStorage);
-
         System.out.println("Please input employee id");
         String employeeId = scanner.nextLine();
         Employee employeeFromStorage = employeeStorage.getById(employeeId);
@@ -74,22 +78,16 @@ public class EmployeeManagementMain {
             System.out.println("Employee does not exists");
             return;
         }
-
         System.out.println("Please input employee name");
         String name = scanner.nextLine();
-
         System.out.println("Please input employee surname");
         String surname = scanner.nextLine();
-
         System.out.println("Please input employee phone");
         String phone = scanner.nextLine();
-
         System.out.println("Please input employee salary");
         double salary = Double.parseDouble(scanner.nextLine());
-
         System.out.println("Please input employee position");
         String position = scanner.nextLine();
-
         employeeFromStorage.setName(name);
         employeeFromStorage.setSurname(surname);
         employeeFromStorage.setPhone(phone);
@@ -107,13 +105,10 @@ public class EmployeeManagementMain {
             System.out.println("Company with " + companyId + " does not exists!!!");
             return;
         }
-
         System.out.println("Please input new company name");
         String companyName = scanner.nextLine();
-
         System.out.println("Please input new company address");
         String companyAddress = scanner.nextLine();
-
         companyFromStorage.setName(companyName);
         companyFromStorage.setAddress(companyAddress);
         System.out.println("Company updated.");
@@ -128,7 +123,6 @@ public class EmployeeManagementMain {
             return;
         }
         employeeStorage.searchEmployeesByCompany(companyFromStorage);
-
         System.out.println("Please input employee id");
         String employeeId = scanner.nextLine();
         Employee employeeFromStorage = employeeStorage.getById(employeeId);
@@ -136,7 +130,6 @@ public class EmployeeManagementMain {
             System.out.println("Employee with does not exists");
             return;
         }
-
         if(!employeeFromStorage.getCompany().equals(companyFromStorage)) {
             System.out.println("Wrong employee id");
             return;
@@ -153,13 +146,10 @@ public class EmployeeManagementMain {
             System.out.println("Company with " + companyId + " already exists!!!");
             return;
         }
-
         System.out.println("Please input company name");
         String companyName = scanner.nextLine();
-
         System.out.println("Please input company address");
         String companyAddress = scanner.nextLine();
-
         Company company = new Company(companyId, companyName, companyAddress);
         companyStorage.add(company);
         System.out.println("Company registered.");
@@ -174,7 +164,6 @@ public class EmployeeManagementMain {
             System.out.println("Company with " + companyId + " does not exists!!!");
             return;
         }
-
         companyStorage.deleteById(companyId);
     }
 
@@ -187,7 +176,6 @@ public class EmployeeManagementMain {
             System.out.println("Company with " + companyId + " does not exists!!!");
             return;
         }
-
         employeeStorage.searchEmployeesByCompany(companyFromStorage);
     }
 
@@ -211,7 +199,6 @@ public class EmployeeManagementMain {
             System.out.println("Company with " + companyId + " dose not exists!!!");
             return;
         }
-
         System.out.println("Please input employee id");
         String employeeId = scanner.nextLine();
         Employee employeeFromStorage = employeeStorage.getById(employeeId);
@@ -219,22 +206,16 @@ public class EmployeeManagementMain {
             System.out.println("Employee with " + employeeId + " id already exists");
             return;
         }
-
         System.out.println("Please input employee name");
         String name = scanner.nextLine();
-
         System.out.println("Please input employee surname");
         String surname = scanner.nextLine();
-
         System.out.println("Please input employee phone");
         String phone = scanner.nextLine();
-
         System.out.println("Please input employee salary");
         double salary = Double.parseDouble(scanner.nextLine());
-
         System.out.println("Please input employee position");
         String position = scanner.nextLine();
-
         Employee employee = new Employee(employeeId, name, surname, phone, salary, position, companyFromStorage);
         employeeStorage.add(employee);
         System.out.println("Employee registered.");

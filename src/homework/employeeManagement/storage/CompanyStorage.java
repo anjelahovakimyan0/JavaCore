@@ -1,4 +1,6 @@
-package homework.employeeManagement;
+package homework.employeeManagement.storage;
+
+import homework.employeeManagement.model.Company;
 
 public class CompanyStorage {
 

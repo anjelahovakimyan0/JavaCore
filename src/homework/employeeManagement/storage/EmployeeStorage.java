@@ -1,4 +1,7 @@
-package homework.employeeManagement;
+package homework.employeeManagement.storage;
+
+import homework.employeeManagement.model.Company;
+import homework.employeeManagement.model.Employee;
 
 public class EmployeeStorage {
 
@@ -29,19 +32,6 @@ public class EmployeeStorage {
             employees[i - 1] = employees[i];
         }
         size--;
-    }
-
-    public void changeEmployeeById(String employeeID, String name, String surname,
-                                   double salary, Company company, String position) {
-        for (int i = 0; i < size; i++) {
-            if(employees[i].getId().equals(employeeID)) {
-                employees[i].setName(name);
-                employees[i].setSurname(surname);
-                employees[i].setSalary(salary);
-                employees[i].setCompany(company);
-                employees[i].setPosition(position);
-            }
-        }
     }
 
     public Employee getById(String employeeID) {

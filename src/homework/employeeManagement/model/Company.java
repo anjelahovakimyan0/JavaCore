@@ -1,4 +1,4 @@
-package homework.employeeManagement;
+package homework.employeeManagement.model;
 
 public class Company {
 
