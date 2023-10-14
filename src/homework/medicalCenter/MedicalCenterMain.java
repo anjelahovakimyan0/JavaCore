@@ -36,30 +36,27 @@ public class MedicalCenterMain {
                     searchDoctorByProfession();
                     break;
                 case "3":
-                    searchDoctorById();
-                    break;
-                case "4":
                     deleteDoctorById();
                     break;
-                case "5":
+                case "4":
                     changeDoctorById();
                     break;
-                case "6":
+                case "5":
                     doctorStorage.printAllDoctors();
                     break;
-                case "7":
+                case "6":
                     addPatient();
                     break;
-                case "8":
+                case "7":
                     deletePatientById();
                     break;
-                case "9":
+                case "8":
                     changePatientById();
                     break;
-                case "10":
+                case "9":
                     printAllPatientsByDoctor();
                     break;
-                case "11":
+                case "10":
                     patientStorage.printAllPatients();
                     break;
                 default:
@@ -98,17 +95,6 @@ public class MedicalCenterMain {
         Doctor doctorFromStorage = doctorStorage.searchDoctorByProfession(profession);
         if (doctorFromStorage == null) {
             System.out.println("Doctor does not exists.");
-            return;
-        }
-        System.out.println(doctorFromStorage);
-    }
-
-    private static void searchDoctorById() {
-        System.out.println("Please input doctor id");
-        String id = scanner.nextLine();
-        Doctor doctorFromStorage = doctorStorage.searchDoctorById(id);
-        if (doctorFromStorage == null) {
-            System.out.println("Doctor with " + id + " id does not exists.");
             return;
         }
         System.out.println(doctorFromStorage);
@@ -244,14 +230,13 @@ public class MedicalCenterMain {
         System.out.println("Please input 0 for EXIT");
         System.out.println("Please input 1 for ADD_DOCTOR");
         System.out.println("Please input 2 for SEARCH_DOCTOR_BY_PROFESSION");
-        System.out.println("Please input 3 for SEARCH_DOCTOR_BY_ID");
-        System.out.println("Please input 4 for DELETE_DOCTOR_BY_ID");
-        System.out.println("Please input 5 for CHANGE_DOCTOR_BY_ID");
-        System.out.println("Please input 6 for PRINT_ALL_DOCTORS");
-        System.out.println("Please input 7 for ADD_PATIENT");
-        System.out.println("Please input 8 for DELETE_PATIENT_BY_ID");
-        System.out.println("Please input 9 for CHANGE_PATIENT_BY_ID");
-        System.out.println("Please input 10 for PRINT_ALL_PATIENTS_BY_DOCTOR");
-        System.out.println("Please input 11 for PRINT_ALL_PATIENTS");
+        System.out.println("Please input 3 for DELETE_DOCTOR_BY_ID");
+        System.out.println("Please input 4 for CHANGE_DOCTOR_BY_ID");
+        System.out.println("Please input 5 for PRINT_ALL_DOCTORS");
+        System.out.println("Please input 6 for ADD_PATIENT");
+        System.out.println("Please input 7 for DELETE_PATIENT_BY_ID");
+        System.out.println("Please input 8 for CHANGE_PATIENT_BY_ID");
+        System.out.println("Please input 9 for PRINT_ALL_PATIENTS_BY_DOCTOR");
+        System.out.println("Please input 10 for PRINT_ALL_PATIENTS");
     }
 }
