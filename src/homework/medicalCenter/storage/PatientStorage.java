@@ -43,7 +43,7 @@ public class PatientStorage {
         }
     }
 
-    public void deletePatientsById(String patientId) {
+    public void deletePatientById(String patientId) {
         for (int i = 0; i < size; i++) {
             if (patients[i].getId().equals(patientId)) {
                 for (int j = i + 1; j < size; j++) {

@@ -178,7 +178,7 @@ public class MedicalCenterMain {
             System.out.println("Patient with " + patientId + " id does not exists.");
             return;
         }
-        patientStorage.deletePatientsById(patientId);
+        patientStorage.deletePatientById(patientId);
         System.out.println("Patient is deleted.");
     }
 
