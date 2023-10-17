@@ -4,55 +4,58 @@ import homework.employeeManagement.model.Company;
 import homework.employeeManagement.model.Employee;
 import homework.employeeManagement.storage.CompanyStorage;
 import homework.employeeManagement.storage.EmployeeStorage;
+import homework.employeeManagement.util.DateUtil;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.Scanner;
 
-public class EmployeeManagementMain {
+public class EmployeeManagementMain implements Command {
 
     private static Scanner scanner = new Scanner(System.in);
     private static EmployeeStorage employeeStorage = new EmployeeStorage();
     private static CompanyStorage companyStorage = new CompanyStorage();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         boolean isRun = true;
 
         while (isRun) {
-            printCommands();
+            Command.printCommands();
 
             String command = scanner.nextLine();
 
             switch (command) {
-                case "0":
+                case EXIT:
                     isRun = false;
                     break;
-                case "1":
+                case ADD_COMPANY:
                     addCompany();
                     break;
-                case "2":
+                case ADD_EMPLOYEE:
                     addEmployee();
                     break;
-                case "3":
+                case PRINT_COMPANIES:
                     companyStorage.print();
                     break;
-                case "4":
+                case PRINT_EMPLOYEES:
                     employeeStorage.print();
                     break;
-                case "5":
+                case SEARCH_EMPLOYEE_BY_ID:
                     searchEmployeeById();
                     break;
-                case "6":
+                case SEARCH_EMPLOYEE_BY_COMPANY:
                     searchEmployeeByCompany();
                     break;
-                case "7":
+                case DELETE_COMPANY:
                     deleteCompany();
                     break;
-                case "8":
+                case DELETE_EMPLOYEE:
                     deleteEmployee();
                     break;
-                case "9":
+                case CHANGE_COMPANY:
                     changeCompany();
                     break;
-                case "10":
+                case CHANGE_EMPLOYEE:
                     changeEmployee();
                     break;
                 default:
@@ -66,7 +69,7 @@ public class EmployeeManagementMain {
         companyStorage.print();
         String companyId = scanner.nextLine();
         Company companyFromStorage = companyStorage.getById(companyId);
-        if(companyFromStorage == null) {
+        if (companyFromStorage == null) {
             System.out.println("Company with " + companyId + " dose not exists!!!");
             return;
         }
@@ -101,7 +104,7 @@ public class EmployeeManagementMain {
         companyStorage.print();
         String companyId = scanner.nextLine();
         Company companyFromStorage = companyStorage.getById(companyId);
-        if(companyFromStorage == null) {
+        if (companyFromStorage == null) {
             System.out.println("Company with " + companyId + " does not exists!!!");
             return;
         }
@@ -118,7 +121,7 @@ public class EmployeeManagementMain {
         System.out.println("Please input company id");
         String companyId = scanner.nextLine();
         Company companyFromStorage = companyStorage.getById(companyId);
-        if(companyFromStorage == null) {
+        if (companyFromStorage == null) {
             System.out.println("Company with " + companyId + " id does not exists!!!");
             return;
         }
@@ -130,7 +133,7 @@ public class EmployeeManagementMain {
             System.out.println("Employee with does not exists");
             return;
         }
-        if(!employeeFromStorage.getCompany().equals(companyFromStorage)) {
+        if (!employeeFromStorage.getCompany().equals(companyFromStorage)) {
             System.out.println("Wrong employee id");
             return;
         }
@@ -142,7 +145,7 @@ public class EmployeeManagementMain {
         System.out.println("Please input company id");
         String companyId = scanner.nextLine();
         Company companyFromStorage = companyStorage.getById(companyId);
-        if(companyFromStorage != null) {
+        if (companyFromStorage != null) {
             System.out.println("Company with " + companyId + " already exists!!!");
             return;
         }
@@ -160,7 +163,7 @@ public class EmployeeManagementMain {
         companyStorage.print();
         String companyId = scanner.nextLine();
         Company companyFromStorage = companyStorage.getById(companyId);
-        if(companyFromStorage == null) {
+        if (companyFromStorage == null) {
             System.out.println("Company with " + companyId + " does not exists!!!");
             return;
         }
@@ -172,7 +175,7 @@ public class EmployeeManagementMain {
         companyStorage.print();
         String companyId = scanner.nextLine();
         Company companyFromStorage = companyStorage.getById(companyId);
-        if(companyFromStorage == null) {
+        if (companyFromStorage == null) {
             System.out.println("Company with " + companyId + " does not exists!!!");
             return;
         }
@@ -183,19 +186,19 @@ public class EmployeeManagementMain {
         System.out.println("Please input employee Id");
         String employeeId = scanner.nextLine();
         Employee byId = employeeStorage.getById(employeeId);
-        if(byId == null) {
+        if (byId == null) {
             System.out.println("Employee with " + employeeId + " does not exists!!!");
             return;
         }
         System.out.println(byId);
     }
 
-    private static void addEmployee() {
+    private static void addEmployee() throws ParseException {
         System.out.println("Please choose company id");
         companyStorage.print();
         String companyId = scanner.nextLine();
         Company companyFromStorage = companyStorage.getById(companyId);
-        if(companyFromStorage == null) {
+        if (companyFromStorage == null) {
             System.out.println("Company with " + companyId + " dose not exists!!!");
             return;
         }
@@ -216,22 +219,13 @@ public class EmployeeManagementMain {
         double salary = Double.parseDouble(scanner.nextLine());
         System.out.println("Please input employee position");
         String position = scanner.nextLine();
-        Employee employee = new Employee(employeeId, name, surname, phone, salary, position, companyFromStorage);
+        System.out.println("Please input employee date of birthday (dd/MM/yyyy)");
+        String dateOfBirthdayStr = scanner.nextLine();
+        Date dateOfBirthday = DateUtil.stringToDate(dateOfBirthdayStr);
+        Date registerDate = new Date();
+        Employee employee = new Employee(employeeId, name, surname, phone,
+                salary, position, companyFromStorage, dateOfBirthday, registerDate);
         employeeStorage.add(employee);
         System.out.println("Employee registered.");
-    }
-
-    private static void printCommands() {
-        System.out.println("Please input 0 for EXIT");
-        System.out.println("Please input 1 for ADD_COMPANY");
-        System.out.println("Please input 2 for ADD_EMPLOYEE");
-        System.out.println("Please input 3 for PRINT_ALL_COMPANIES");
-        System.out.println("Please input 4 for PRINT_ALL_EMPLOYEES");
-        System.out.println("Please input 5 for SEARCH_EMPLOYEE_BY_ID");
-        System.out.println("Please input 6 for SEARCH EMPLOYEE_BY_COMPANY");
-        System.out.println("Please input 7 for DELETE_COMPANY");
-        System.out.println("Please input 8 for DELETE_EMPLOYEE");
-        System.out.println("Please input 9 for CHANGE_COMPANY");
-        System.out.println("Please input 10 for CHANGE_EMPLOYEE");
     }
 }

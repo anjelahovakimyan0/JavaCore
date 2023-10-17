@@ -3,6 +3,9 @@ package homework.medicalCenter.storage;
 import homework.medicalCenter.model.Doctor;
 import homework.medicalCenter.model.Patient;
 
+import java.text.ParseException;
+import java.util.Date;
+
 public class PatientStorage {
 
     private Patient[] patients = new Patient[10];
@@ -32,7 +35,7 @@ public class PatientStorage {
         }
     }
 
-    public void deletePatientsByDoctorId(String doctorId) {
+    public void deletePatientByDoctorId(String doctorId) {
         for (int i = 0; i < size; i++) {
             if (patients[i].getDoctor().getId().equals(doctorId)) {
                 for (int j = i + 1; j < size; j++) {
@@ -58,6 +61,39 @@ public class PatientStorage {
         for (int i = 0; i < size; i++) {
             System.out.println(patients[i]);
         }
+    }
+
+    public boolean IsDoctorFree(Doctor doctor, Date registerDateTime) throws ParseException {
+        for (int i = 0; i < size; i++) {
+            if (patients[i].getDoctor().equals(doctor) &&
+                    !patients[i].getRegisterDateTime().equals(registerDateTime)) {
+                if (patients[i].getRegisterDateTime().getDate() == registerDateTime.getDate()) {
+                    if (patients[i].getRegisterDateTime().before(registerDateTime)) {
+                        long milliSeconds = registerDateTime.getTime() - patients[i].getRegisterDateTime().getTime();
+                        long minutes = (long) (milliSeconds * 0.001 * 0.0166667);
+                        if (minutes >= 30) {
+                            return true;
+                        }
+                    } else if (patients[i].getRegisterDateTime().after(registerDateTime)) {
+                        long milliseconds = patients[i].getRegisterDateTime().getTime() - registerDateTime.getTime();
+                        long minutes = (long) (milliseconds * 0.001 * 0.0166667);
+                        if (minutes >= 30) {
+                            return true;
+                        }
+                    }
+                } else {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean isStorageEmpty() {
+        if (size == 0) {
+            return true;
+        }
+        return false;
     }
 
     private void extend() {

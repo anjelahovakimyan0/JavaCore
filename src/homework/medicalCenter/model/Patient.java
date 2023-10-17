@@ -1,7 +1,6 @@
 package homework.medicalCenter.model;
 
 import java.util.Date;
-import java.util.Objects;
 
 public class Patient extends Person {
 

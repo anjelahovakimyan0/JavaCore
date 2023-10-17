@@ -109,7 +109,7 @@ public class MedicalCenterMain {
             return;
         }
         doctorStorage.deleteById(doctorId);
-        patientStorage.deletePatientsByDoctorId(doctorId);
+        patientStorage.deletePatientByDoctorId(doctorId);
         System.out.println("Doctor is deleted.");
     }
 
@@ -163,10 +163,23 @@ public class MedicalCenterMain {
         String phoneNumber = scanner.nextLine();
         System.out.println("Please input register date time");
         Date registerDateTime = sdf.parse(scanner.nextLine());
-        patient = new Patient(patientId, name, surname, phoneNumber,
-                doctorFromStorage, registerDateTime);
-        patientStorage.add(patient);
-        System.out.println("Patient registered.");
+
+        if (patientStorage.isStorageEmpty()) {
+            patient = new Patient(patientId, name, surname, phoneNumber,
+                    doctorFromStorage, registerDateTime);
+            patientStorage.add(patient);
+            System.out.println("Patient registered.");
+        } else {
+            boolean freeDoctor = patientStorage.IsDoctorFree(doctorFromStorage, registerDateTime);
+            if (freeDoctor) {
+                patient = new Patient(patientId, name, surname, phoneNumber,
+                        doctorFromStorage, registerDateTime);
+                patientStorage.add(patient);
+                System.out.println("Patient registered.");
+            } else {
+                System.out.println("Doctor is busy.");
+            }
+        }
     }
 
     private static void deletePatientById() {
