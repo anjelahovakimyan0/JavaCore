@@ -63,6 +63,13 @@ public class PatientStorage {
         }
     }
 
+    public boolean isStorageEmpty() {
+        if (size == 0) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean IsDoctorFree(Doctor doctor, Date registerDateTime) throws ParseException {
         for (int i = 0; i < size; i++) {
             if (patients[i].getDoctor().equals(doctor) &&
@@ -85,13 +92,6 @@ public class PatientStorage {
                     return true;
                 }
             }
-        }
-        return false;
-    }
-
-    public boolean isStorageEmpty() {
-        if (size == 0) {
-            return true;
         }
         return false;
     }
