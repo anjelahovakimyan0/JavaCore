@@ -170,7 +170,7 @@ public class MedicalCenterMain {
             patientStorage.add(patient);
             System.out.println("Patient registered.");
         } else {
-            boolean freeDoctor = patientStorage.IsDoctorFree(doctorFromStorage, registerDateTime);
+            boolean freeDoctor = patientStorage.isDoctorFree(doctorFromStorage, registerDateTime);
             if (freeDoctor) {
                 patient = new Patient(patientId, name, surname, phoneNumber,
                         doctorFromStorage, registerDateTime);

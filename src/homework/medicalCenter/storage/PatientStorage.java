@@ -70,7 +70,7 @@ public class PatientStorage {
         return false;
     }
 
-    public boolean IsDoctorFree(Doctor doctor, Date registerDateTime) throws ParseException {
+    public boolean isDoctorFree(Doctor doctor, Date registerDateTime) throws ParseException {
         for (int i = 0; i < size; i++) {
             if (patients[i].getDoctor().equals(doctor) &&
                     !patients[i].getRegisterDateTime().equals(registerDateTime)) {
