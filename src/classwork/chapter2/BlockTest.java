@@ -1,10 +1,10 @@
 package classwork.chapter2;
 
 /*
-* Продемонстрировать применение блока кода.
-*
-* Просвоить исходному файлу имя "BookTest.java"
-* */
+ * Продемонстрировать применение блока кода.
+ *
+ * Просвоить исходному файлу имя "BookTest.java"
+ * */
 public class BlockTest {
 
     public static void main(String[] args) {
