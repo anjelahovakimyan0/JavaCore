@@ -2,10 +2,10 @@ package homework.medicalCenter.model;
 
 public class Person {
 
-    private String id;
-    private String name;
-    private String surname;
-    private String phoneNumber;
+    protected String id;
+    protected String name;
+    protected String surname;
+    protected String phoneNumber;
 
     public Person() {
     }
@@ -47,15 +47,6 @@ public class Person {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    @Override
-    public String toString() {
-        return "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", ";
     }
 
     @Override

@@ -6,14 +6,16 @@ public class Patient extends Person {
 
     private Doctor doctor;
     private Date registerDateTime;
+    private Date appointmentDateTime;
 
     public Patient() {
     }
 
-    public Patient(String id, String name, String surname, String phoneNumber, Doctor doctor, Date registerDateTime) {
+    public Patient(String id, String name, String surname, String phoneNumber, Doctor doctor, Date registerDateTime, Date appointmentDateTime) {
         super(id, name, surname, phoneNumber);
         this.doctor = doctor;
         this.registerDateTime = registerDateTime;
+        this.appointmentDateTime = appointmentDateTime;
     }
 
     public Doctor getDoctor() {
@@ -32,11 +34,24 @@ public class Patient extends Person {
         this.registerDateTime = registerDateTime;
     }
 
+    public Date getAppointmentDateTime() {
+        return appointmentDateTime;
+    }
+
+    public void setAppointmentDateTime(Date appointmentDateTime) {
+        this.appointmentDateTime = appointmentDateTime;
+    }
+
     @Override
     public String toString() {
-        return "Patient{" + super.toString() +
-                ", registerDateTime=" + registerDateTime +
+        return "Patient{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 ", doctor=" + doctor +
+                ", registerDateTime=" + registerDateTime +
+                ", appointmentDateTime=" + appointmentDateTime +
                 "} ";
     }
 }

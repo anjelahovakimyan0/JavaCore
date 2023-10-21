@@ -32,15 +32,18 @@ public class Doctor extends Person {
 
     @Override
     public String toString() {
-        return "Doctor{" + super.toString() +
-                "email='" + email + '\'' +
+        return "Doctor{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
                 ", profession='" + profession + '\'' +
                 "} ";
     }
 
     @Override
     public boolean equals(Object o) {
-        super.equals(o);
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
@@ -53,7 +56,6 @@ public class Doctor extends Person {
 
     @Override
     public int hashCode() {
-        super.hashCode();
         int result = super.hashCode();
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (profession != null ? profession.hashCode() : 0);

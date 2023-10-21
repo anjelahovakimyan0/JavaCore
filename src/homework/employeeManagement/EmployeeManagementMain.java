@@ -16,7 +16,7 @@ public class EmployeeManagementMain implements Command {
     private static EmployeeStorage employeeStorage = new EmployeeStorage();
     private static CompanyStorage companyStorage = new CompanyStorage();
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) {
         boolean isRun = true;
 
         while (isRun) {
@@ -193,13 +193,13 @@ public class EmployeeManagementMain implements Command {
         System.out.println(byId);
     }
 
-    private static void addEmployee() throws ParseException {
+    private static void addEmployee() {
         System.out.println("Please choose company id");
         companyStorage.print();
         String companyId = scanner.nextLine();
         Company companyFromStorage = companyStorage.getById(companyId);
         if (companyFromStorage == null) {
-            System.out.println("Company with " + companyId + " dose not exists!!!");
+            System.out.println("Company with " + companyId + " does not exists!!!");
             return;
         }
         System.out.println("Please input employee id");
@@ -221,7 +221,12 @@ public class EmployeeManagementMain implements Command {
         String position = scanner.nextLine();
         System.out.println("Please input employee date of birthday (dd/MM/yyyy)");
         String dateOfBirthdayStr = scanner.nextLine();
-        Date dateOfBirthday = DateUtil.stringToDate(dateOfBirthdayStr);
+        Date dateOfBirthday = null;
+        try {
+            dateOfBirthday = DateUtil.stringToDate(dateOfBirthdayStr);
+        } catch (ParseException e) {
+            System.out.println("Date of birthday is incorrect!");
+        }
         Date registerDate = new Date();
         Employee employee = new Employee(employeeId, name, surname, phone,
                 salary, position, companyFromStorage, dateOfBirthday, registerDate);
@@ -229,3 +234,4 @@ public class EmployeeManagementMain implements Command {
         System.out.println("Employee registered.");
     }
 }
+

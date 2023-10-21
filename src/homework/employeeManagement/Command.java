@@ -27,8 +27,4 @@ public interface Command {
         System.out.println("Please input " + CHANGE_COMPANY + " for CHANGE_COMPANY");
         System.out.println("Please input " + CHANGE_EMPLOYEE + " for CHANGE_EMPLOYEE");
     }
-
-    default void pr() {
-        System.out.println("A");
-    }
 }
