@@ -1,4 +1,4 @@
-package classwork.chapter9.lesson20;
+package classwork.lesson20;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

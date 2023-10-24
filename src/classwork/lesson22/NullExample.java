@@ -1,4 +1,4 @@
-package classwork.chapter10.lesson22;
+package classwork.lesson22;
 
 import java.util.Date;
 
