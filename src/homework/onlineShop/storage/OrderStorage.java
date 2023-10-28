@@ -11,7 +11,7 @@ public class OrderStorage {
     private int size;
 
     public void add(Order order) {
-        if(size == orders.length) {
+        if (size == orders.length) {
             extend();
         }
         orders[size++] = order;
@@ -25,7 +25,7 @@ public class OrderStorage {
 
     public void printMyOrders(User user) {
         for (int i = 0; i < size; i++) {
-            if(orders[i].getUser().equals(user)) {
+            if (orders[i].getUser().equals(user)) {
                 System.out.println(orders[i]);
             }
         }
@@ -33,7 +33,7 @@ public class OrderStorage {
 
     public Order getById(String orderId) {
         for (int i = 0; i < size; i++) {
-            if(orders[i].getId().equals(orderId)) {
+            if (orders[i].getId().equals(orderId)) {
                 return orders[i];
             }
         }
@@ -48,7 +48,7 @@ public class OrderStorage {
 
     public void deleteDeliveredProducts(String userId, OrderStatus orderStatus) {
         for (int i = 0; i < size; i++) {
-            if(orders[i].getUser().getId().equals(userId) && orderStatus == OrderStatus.DELIVERED) {
+            if (orders[i].getUser().getId().equals(userId) && orderStatus == OrderStatus.DELIVERED) {
                 for (int j = i + 1; j < size; j++) {
                     orders[j - 1] = orders[j];
                 }
@@ -59,7 +59,7 @@ public class OrderStorage {
 
     public void setOrderDelivered(String userId, String orderId) {
         for (int i = 0; i < size; i++) {
-            if(orders[i].getUser().getId().equals(userId) && orders[i].getId().equals(orderId)) {
+            if (orders[i].getUser().getId().equals(userId) && orders[i].getId().equals(orderId)) {
                 orders[i].setOrderStatus(OrderStatus.DELIVERED);
             }
         }
@@ -67,7 +67,7 @@ public class OrderStorage {
 
     public void changeOrderStatus() {
         for (int i = 0; i < size; i++) {
-            if(orders[i].getOrderStatus() == OrderStatus.DELIVERED) {
+            if (orders[i].getOrderStatus() == OrderStatus.DELIVERED) {
                 for (int j = i + 1; j < size; j++) {
                     orders[j - 1] = orders[j];
                 }

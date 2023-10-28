@@ -8,7 +8,7 @@ public class UserStorage {
     private int size;
 
     public void register(User user) {
-        if(size == users.length) {
+        if (size == users.length) {
             extend();
         }
         users[size++] = user;
@@ -16,7 +16,7 @@ public class UserStorage {
 
     public User getById(String id) {
         for (int i = 0; i < size; i++) {
-            if(users[i].getId().equals(id)) {
+            if (users[i].getId().equals(id)) {
                 return users[i];
             }
         }
@@ -25,7 +25,7 @@ public class UserStorage {
 
     public User login(String email, String password) {
         for (int i = 0; i < size; i++) {
-            if(users[i].getEmail().equals(email) && users[i].getPassword().equals(password)) {
+            if (users[i].getEmail().equals(email) && users[i].getPassword().equals(password)) {
                 return users[i];
             }
         }
