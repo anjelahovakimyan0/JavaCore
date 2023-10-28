@@ -1,5 +1,6 @@
 package homework.employeeManagement;
 
+import homework.employeeManagement.exception.EmployeeNotFoundException;
 import homework.employeeManagement.model.Company;
 import homework.employeeManagement.model.Employee;
 import homework.employeeManagement.storage.CompanyStorage;
@@ -76,27 +77,29 @@ public class EmployeeManagementMain implements Command {
         employeeStorage.searchEmployeesByCompany(companyFromStorage);
         System.out.println("Please input employee id");
         String employeeId = scanner.nextLine();
-        Employee employeeFromStorage = employeeStorage.getById(employeeId);
-        if (employeeFromStorage == null) {
-            System.out.println("Employee does not exists");
-            return;
+        try {
+            Employee employeeFromStorage = employeeStorage.getById(employeeId);
+            System.out.println("Please input employee name");
+            String name = scanner.nextLine();
+            System.out.println("Please input employee surname");
+            String surname = scanner.nextLine();
+            System.out.println("Please input employee phone");
+            String phone = scanner.nextLine();
+            System.out.println("Please input employee salary");
+            double salary = Double.parseDouble(scanner.nextLine());
+            System.out.println("Please input employee position");
+            String position = scanner.nextLine();
+            employeeFromStorage.setName(name);
+            employeeFromStorage.setSurname(surname);
+            employeeFromStorage.setPhone(phone);
+            employeeFromStorage.setSalary(salary);
+            employeeFromStorage.setPosition(position);
+            System.out.println("Employee updated.");
+        } catch (EmployeeNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Wrong salary, please input only numbers!");
         }
-        System.out.println("Please input employee name");
-        String name = scanner.nextLine();
-        System.out.println("Please input employee surname");
-        String surname = scanner.nextLine();
-        System.out.println("Please input employee phone");
-        String phone = scanner.nextLine();
-        System.out.println("Please input employee salary");
-        double salary = Double.parseDouble(scanner.nextLine());
-        System.out.println("Please input employee position");
-        String position = scanner.nextLine();
-        employeeFromStorage.setName(name);
-        employeeFromStorage.setSurname(surname);
-        employeeFromStorage.setPhone(phone);
-        employeeFromStorage.setSalary(salary);
-        employeeFromStorage.setPosition(position);
-        System.out.println("Employee updated.");
     }
 
     private static void changeCompany() {
@@ -126,19 +129,20 @@ public class EmployeeManagementMain implements Command {
             return;
         }
         employeeStorage.searchEmployeesByCompany(companyFromStorage);
+
         System.out.println("Please input employee id");
         String employeeId = scanner.nextLine();
-        Employee employeeFromStorage = employeeStorage.getById(employeeId);
-        if (employeeFromStorage == null) {
-            System.out.println("Employee with does not exists");
-            return;
+        try {
+            Employee employeeFromStorage = employeeStorage.getById(employeeId);
+            if (!employeeFromStorage.getCompany().equals(companyFromStorage)) {
+                System.out.println("Wrong employee id");
+                return;
+            }
+            employeeStorage.deleteById(employeeId);
+            System.out.println("Employee deleted.");
+        } catch (EmployeeNotFoundException e) {
+            System.out.println(e.getMessage());
         }
-        if (!employeeFromStorage.getCompany().equals(companyFromStorage)) {
-            System.out.println("Wrong employee id");
-            return;
-        }
-        employeeStorage.deleteById(employeeId);
-        System.out.println("Employee deleted.");
     }
 
     private static void addCompany() {
@@ -185,12 +189,11 @@ public class EmployeeManagementMain implements Command {
     private static void searchEmployeeById() {
         System.out.println("Please input employee Id");
         String employeeId = scanner.nextLine();
-        Employee byId = employeeStorage.getById(employeeId);
-        if (byId == null) {
-            System.out.println("Employee with " + employeeId + " does not exists!!!");
-            return;
+        try {
+            System.out.println(employeeStorage.getById(employeeId));
+        } catch (EmployeeNotFoundException e) {
+            System.out.println(e.getMessage());
         }
-        System.out.println(byId);
     }
 
     private static void addEmployee() {
@@ -204,34 +207,41 @@ public class EmployeeManagementMain implements Command {
         }
         System.out.println("Please input employee id");
         String employeeId = scanner.nextLine();
-        Employee employeeFromStorage = employeeStorage.getById(employeeId);
-        if (employeeFromStorage != null) {
-            System.out.println("Employee with " + employeeId + " id already exists");
-            return;
-        }
-        System.out.println("Please input employee name");
-        String name = scanner.nextLine();
-        System.out.println("Please input employee surname");
-        String surname = scanner.nextLine();
-        System.out.println("Please input employee phone");
-        String phone = scanner.nextLine();
-        System.out.println("Please input employee salary");
-        double salary = Double.parseDouble(scanner.nextLine());
-        System.out.println("Please input employee position");
-        String position = scanner.nextLine();
-        System.out.println("Please input employee date of birthday (dd/MM/yyyy)");
-        String dateOfBirthdayStr = scanner.nextLine();
-        Date dateOfBirthday = null;
+        Employee employeeFromStorage;
+        boolean exists;
         try {
-            dateOfBirthday = DateUtil.stringToDate(dateOfBirthdayStr);
-        } catch (ParseException e) {
-            System.out.println("Date of birthday is incorrect!");
+            employeeFromStorage = employeeStorage.getById(employeeId);
+            exists = true;
+        } catch (EmployeeNotFoundException e) {
+            exists = false;
         }
-        Date registerDate = new Date();
-        Employee employee = new Employee(employeeId, name, surname, phone,
-                salary, position, companyFromStorage, dateOfBirthday, registerDate);
-        employeeStorage.add(employee);
-        System.out.println("Employee registered.");
+        if (!exists) {
+            System.out.println("Please input employee name");
+            String name = scanner.nextLine();
+            System.out.println("Please input employee surname");
+            String surname = scanner.nextLine();
+            System.out.println("Please input employee phone");
+            String phone = scanner.nextLine();
+            System.out.println("Please input employee salary");
+            double salary = Double.parseDouble(scanner.nextLine());
+            System.out.println("Please input employee position");
+            String position = scanner.nextLine();
+            System.out.println("Please input employee date of birthday (dd/MM/yyyy)");
+            String dateOfBirthdayStr = scanner.nextLine();
+            Date dateOfBirthday = null;
+            try {
+                dateOfBirthday = DateUtil.stringToDate(dateOfBirthdayStr);
+            } catch (ParseException e) {
+                System.out.println("Date of birthday is incorrect!");
+            }
+            Date registerDate = new Date();
+            Employee employee = new Employee(employeeId, name, surname, phone,
+                    salary, position, companyFromStorage, dateOfBirthday, registerDate);
+            employeeStorage.add(employee);
+            System.out.println("Employee registered.");
+        } else {
+            System.out.println("Employee already exists!");
+        }
     }
 }
 
