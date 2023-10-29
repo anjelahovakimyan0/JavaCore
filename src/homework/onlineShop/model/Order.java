@@ -1,9 +1,5 @@
 package homework.onlineShop.model;
 
-import homework.medicalCenter.model.Patient;
-import homework.onlineShop.enums.OrderStatus;
-import homework.onlineShop.enums.PaymentMethod;
-
 import java.util.Date;
 
 public class Order {

@@ -1,6 +1,6 @@
 package homework.onlineShop.storage;
 
-import homework.onlineShop.enums.OrderStatus;
+import homework.onlineShop.model.OrderStatus;
 import homework.onlineShop.model.Order;
 import homework.onlineShop.model.User;
 

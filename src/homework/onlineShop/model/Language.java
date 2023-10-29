@@ -1,10 +1,11 @@
-package classwork.lesson24;
+package homework.onlineShop.model;
 
 public enum Language {
 
     HY("Հայերեն"),
     RU,
-    ENG("English");
+    ENG("English"),
+    FR;
 
     private String languageName;
 

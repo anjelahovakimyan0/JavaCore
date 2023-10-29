@@ -1,7 +1,5 @@
 package homework.onlineShop.model;
 
-import homework.onlineShop.enums.UserType;
-
 public class User {
 
     private String id;

@@ -1,6 +1,6 @@
 package homework.onlineShop.storage;
 
-import homework.onlineShop.enums.ProductType;
+import homework.onlineShop.model.ProductType;
 import homework.onlineShop.exception.OutOfStockException;
 import homework.onlineShop.model.Product;
 

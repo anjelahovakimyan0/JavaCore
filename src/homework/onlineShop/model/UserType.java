@@ -1,4 +1,4 @@
-package homework.onlineShop.enums;
+package homework.onlineShop.model;
 
 public enum UserType {
 
