@@ -4,6 +4,7 @@ import homework.onlineShop.commands.*;
 import homework.onlineShop.model.*;
 import homework.onlineShop.storage.*;
 import homework.onlineShop.exception.OutOfStockException;
+import homework.onlineShop.util.OrderIdUtil;
 
 import java.util.Date;
 import java.util.Scanner;
@@ -172,10 +173,7 @@ public class OnlineShopMain implements LoginCommand, UserCommand, AdminCommand {
         System.out.println("Do you want to buy this product with this price? Please input 'yes', if you confirm.");
         String yes = scanner.nextLine();
         if (yes.equals("yes")) {
-            System.out.println("Please input order id");
-            String orderId = scanner.nextLine();
-
-            Order order = new Order(orderId, user, productFromStorage, new Date(),
+            Order order = new Order(OrderIdUtil.generateId(), user, productFromStorage, new Date(),
                     productFromStorage.getPrice(), OrderStatus.NEW, orderQty, paymentMethod);
             orderStorage.add(order);
             productFromStorage.setStockQty(productFromStorage.getStockQty() - orderQty);
