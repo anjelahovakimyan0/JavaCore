@@ -1,9 +1,13 @@
 package classwork.lesson24;
 
+import classwork.lesson25.annotation.FirstAnnotation;
+import classwork.lesson25.annotation.Model;
 import homework.onlineShop.model.Language;
 
+@Model(name = "User", val = 5)
 public class User {
 
+    @FirstAnnotation
     private String name;
     private String surname;
     private String email;
@@ -12,7 +16,8 @@ public class User {
     public User() {
     }
 
-    public User(String name, String surname, String email, Language lang) {
+    @FirstAnnotation
+    public User(@FirstAnnotation String name, String surname, String email, Language lang) {
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -23,6 +28,7 @@ public class User {
         return name;
     }
 
+    @FirstAnnotation
     public void setName(String name) {
         this.name = name;
     }
@@ -31,6 +37,7 @@ public class User {
         return surname;
     }
 
+    @Deprecated
     public void setSurname(String surname) {
         this.surname = surname;
     }
@@ -51,7 +58,13 @@ public class User {
         this.lang = lang;
     }
 
+    @FirstAnnotation
+    private static void printHello() {
+        System.out.println("hello");
+    }
+
     @Override
+    @FirstAnnotation
     public String toString() {
         return "User{" +
                 "name='" + name + '\'' +
