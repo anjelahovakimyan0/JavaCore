@@ -1,15 +1,16 @@
 package homework.onlineShop;
 
-import homework.onlineShop.commands.*;
-import homework.onlineShop.model.*;
-import homework.onlineShop.storage.*;
 import homework.onlineShop.exception.OutOfStockException;
+import homework.onlineShop.model.*;
+import homework.onlineShop.storage.OrderStorage;
+import homework.onlineShop.storage.ProductStorage;
+import homework.onlineShop.storage.UserStorage;
 import homework.onlineShop.util.OrderIdUtil;
 
 import java.util.Date;
 import java.util.Scanner;
 
-public class OnlineShopMain implements LoginCommand, UserCommand, AdminCommand {
+public class OnlineShopMain implements Command {
 
     private static Scanner scanner = new Scanner(System.in);
     private static UserStorage userStorage = new UserStorage();
@@ -17,86 +18,88 @@ public class OnlineShopMain implements LoginCommand, UserCommand, AdminCommand {
     private static OrderStorage orderStorage = new OrderStorage();
 
     public static void main(String[] args) {
-        boolean isRegistered = false;
         boolean isRun = true;
-        User user = null;
 
         while (isRun) {
-            while (!isRegistered) {
-                LoginCommand.printCommands();
-                String command = scanner.nextLine();
-                switch (command) {
-                    case LOGIN:
-                        user = login();
-                        if (user != null) {
-                            System.out.println("Successfully logined");
-                            isRegistered = true;
-                        }
-                        break;
-                    case REGISTER:
-                        register();
-                        break;
-                    default:
-                        System.out.println("Invalid command.");
-                        break;
-                }
+            Command.printCommands();
+            String command = scanner.nextLine();
+            switch (command) {
+                case EXIT:
+                    isRun = false;
+                    break;
+                case LOGIN:
+                    login();
+                    break;
+                case REGISTER:
+                    register();
+                    break;
+                default:
+                    System.out.println("Invalid command.");
+                    break;
             }
+        }
+    }
 
-            if (user.getType().equals(UserType.ADMIN)) {
-                AdminCommand.printCommands();
-                String command = scanner.nextLine();
-                switch (command) {
-                    case EXIT:
-                        isRun = false;
-                        break;
-                    case ADD_PRODUCT:
-                        addProduct();
-                        break;
-                    case REMOVE_PRODUCT_BY_ID:
-                        removeProductById();
-                        break;
-                    case AdminCommand.PRINT_PRODUCTS:
-                        productStorage.printProducts();
-                        break;
-                    case PRINT_USERS:
-                        userStorage.printUsers();
-                        break;
-                    case PRINT_ORDERS:
-                        orderStorage.printOrders();
-                        break;
-                    case CHANGE_ORDER_STATUS:
-                        orderStorage.changeOrderStatus();
-                        break;
-                    case AdminCommand.LOGOUT:
-                        isRegistered = false;
-                        break;
-                    default:
-                        System.out.println("Invalid command.");
-                        break;
-                }
-            } else if (user.getType().equals(UserType.USER)) {
-                UserCommand.printCommand();
-                String command = scanner.nextLine();
-                switch (command) {
-                    case UserCommand.LOGOUT:
-                        isRegistered = false;
-                        break;
-                    case UserCommand.PRINT_PRODUCTS:
-                        productStorage.printProducts();
-                        break;
-                    case BUY_PRODUCT:
-                        buyProduct(user);
-                        break;
-                    case PRINT_MY_ORDERS:
-                        printMyOrders();
-                        break;
-                    case CANCEL_ORDER_BY_ID:
-                        cancelOrderById();
-                        break;
-                    default:
-                        System.out.println("Invalid command.");
-                        break;
-                }
+    private static void adminCommands() {
+        boolean isRun = true;
+
+        while (isRun) {
+            Command.printAdminCommands();
+            String command = scanner.nextLine();
+            switch (command) {
+                case LOGOUT:
+                    isRun = false;
+                    break;
+                case ADD_PRODUCT:
+                    addProduct();
+                    break;
+                case REMOVE_PRODUCT_BY_ID:
+                    removeProductById();
+                    break;
+                case PRINT_ALL_PRODUCTS:
+                    productStorage.printProducts();
+                    break;
+                case PRINT_USERS:
+                    userStorage.printUsers();
+                    break;
+                case PRINT_ORDERS:
+                    orderStorage.printOrders();
+                    break;
+                case CHANGE_ORDER_STATUS:
+                    orderStorage.changeOrderStatus();
+                    break;
+                default:
+                    System.out.println("Invalid command.");
+                    break;
+            }
+        }
+    }
+
+    private static void userCommands() {
+        boolean isRun = true;
+
+        while (isRun) {
+            Command.printUserCommands();
+            String command = scanner.nextLine();
+            switch (command) {
+                case Command.LOGOUT:
+                    isRun = false;
+                    break;
+                case PRINT_PRODUCTS:
+                    productStorage.printProducts();
+                    break;
+                case BUY_PRODUCT:
+                    buyProduct();
+                    break;
+                case PRINT_MY_ORDERS:
+                    printMyOrders();
+                    break;
+                case CANCEL_ORDER_BY_ID:
+                    cancelOrderById();
+                    break;
+                default:
+                    System.out.println("Invalid command.");
+                    break;
             }
         }
     }
@@ -144,7 +147,7 @@ public class OnlineShopMain implements LoginCommand, UserCommand, AdminCommand {
         System.out.println("Product is removed");
     }
 
-    private static void buyProduct(User user) {
+    private static void buyProduct() {
         productStorage.printProducts();
         System.out.println("Please input product id");
         String productId = scanner.nextLine();
@@ -173,7 +176,14 @@ public class OnlineShopMain implements LoginCommand, UserCommand, AdminCommand {
         System.out.println("Do you want to buy this product with this price? Please input 'yes', if you confirm.");
         String yes = scanner.nextLine();
         if (yes.equals("yes")) {
-            Order order = new Order(OrderIdUtil.generateId(), user, productFromStorage, new Date(),
+            System.out.println("Please input your user id");
+            String userId = scanner.nextLine();
+            User userFromStorage = userStorage.getById(userId);
+            if (userFromStorage == null) {
+                System.out.println("User with " + userId + " does not exists");
+                return;
+            }
+            Order order = new Order(OrderIdUtil.generateId(), userFromStorage, productFromStorage, new Date(),
                     productFromStorage.getPrice(), OrderStatus.NEW, orderQty, paymentMethod);
             orderStorage.add(order);
             productFromStorage.setStockQty(productFromStorage.getStockQty() - orderQty);
@@ -209,30 +219,21 @@ public class OnlineShopMain implements LoginCommand, UserCommand, AdminCommand {
         System.out.println("Order canceled!");
     }
 
-    private static void setOrderDelivered() {
-        System.out.println("Please input your user id");
-        String userId = scanner.nextLine();
-        System.out.println("Please input your order id");
-        String orderId = scanner.nextLine();
-        if (orderId != null) {
-            orderStorage.setOrderDelivered(userId, orderId);
-            System.out.println("Order status changed");
-        } else {
-            System.out.println("You don't have any orders");
-        }
-    }
-
-    private static User login() {
+    private static void login() {
         System.out.println("Please input user email");
         String email = scanner.nextLine();
         System.out.println("Please input user password");
         String password = scanner.nextLine();
         User userFromStorage = userStorage.login(email, password);
-        if (userFromStorage == null) {
+        if (userFromStorage != null) {
+            if (userFromStorage.getType() == UserType.ADMIN) {
+                adminCommands();
+            } else if (userFromStorage.getType() == UserType.USER) {
+                userCommands();
+            }
+        } else {
             System.out.println("User email or password is incorrect. Please try again.");
-            return null;
         }
-        return userFromStorage;
     }
 
     private static void register() {
