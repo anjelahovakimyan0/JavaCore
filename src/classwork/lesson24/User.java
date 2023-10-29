@@ -1,5 +1,7 @@
 package classwork.lesson24;
 
+import homework.onlineShop.model.Language;
+
 public class User {
 
     private String name;
