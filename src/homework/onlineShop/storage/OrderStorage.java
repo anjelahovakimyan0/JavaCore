@@ -46,17 +46,6 @@ public class OrderStorage {
         orders = tmp;
     }
 
-    public void deleteDeliveredProducts(String userId, OrderStatus orderStatus) {
-        for (int i = 0; i < size; i++) {
-            if (orders[i].getUser().getId().equals(userId) && orderStatus == OrderStatus.DELIVERED) {
-                for (int j = i + 1; j < size; j++) {
-                    orders[j - 1] = orders[j];
-                }
-                size--;
-            }
-        }
-    }
-
     public void setOrderDelivered(String userId, String orderId) {
         for (int i = 0; i < size; i++) {
             if (orders[i].getUser().getId().equals(userId) && orders[i].getId().equals(orderId)) {
@@ -67,13 +56,9 @@ public class OrderStorage {
 
     public void changeOrderStatus() {
         for (int i = 0; i < size; i++) {
-            if (orders[i].getOrderStatus() == OrderStatus.DELIVERED) {
-                for (int j = i + 1; j < size; j++) {
-                    orders[j - 1] = orders[j];
-                }
-                size--;
+            if(orders[i].getOrderStatus().equals(OrderStatus.DELIVERED)) {
+                orders[i].setOrderStatus(OrderStatus.DELIVERED);
             }
         }
-        System.out.println("Delivered orders are deleted");
     }
 }

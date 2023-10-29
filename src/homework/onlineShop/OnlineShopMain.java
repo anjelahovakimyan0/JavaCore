@@ -93,9 +93,6 @@ public class OnlineShopMain implements LoginCommand, UserCommand, AdminCommand {
                     case CANCEL_ORDER_BY_ID:
                         cancelOrderById();
                         break;
-                    case SET_ORDER_DELIVERED:
-                        setOrderDelivered();
-                        break;
                     default:
                         System.out.println("Invalid command.");
                         break;
@@ -220,7 +217,7 @@ public class OnlineShopMain implements LoginCommand, UserCommand, AdminCommand {
         String userId = scanner.nextLine();
         System.out.println("Please input your order id");
         String orderId = scanner.nextLine();
-        if(orderId != null) {
+        if (orderId != null) {
             orderStorage.setOrderDelivered(userId, orderId);
             System.out.println("Order status changed");
         } else {
