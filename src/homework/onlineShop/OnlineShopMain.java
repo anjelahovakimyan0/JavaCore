@@ -35,7 +35,7 @@ public class OnlineShopMain implements Command {
                     register();
                     break;
                 default:
-                    System.out.println("Invalid command.");
+                    System.out.println("Invalid command. Please try again.");
                     break;
             }
         }
