@@ -85,6 +85,7 @@ public class OnlineShopMain implements Command {
             switch (command) {
                 case Command.LOGOUT:
                     isRun = false;
+                    currentUser = null;
                     break;
                 case PRINT_PRODUCTS:
                     productStorage.printProducts();
