@@ -16,6 +16,7 @@ public class OnlineShopMain implements Command {
     private static UserStorage userStorage = new UserStorage();
     private static ProductStorage productStorage = new ProductStorage();
     private static OrderStorage orderStorage = new OrderStorage();
+    private static User currentUser = null;
 
     public static void main(String[] args) {
         boolean isRun = true;
@@ -92,7 +93,7 @@ public class OnlineShopMain implements Command {
                     buyProduct();
                     break;
                 case PRINT_MY_ORDERS:
-                    printMyOrders();
+                    orderStorage.printMyOrders(currentUser);
                     break;
                 case CANCEL_ORDER_BY_ID:
                     cancelOrderById();
@@ -172,18 +173,11 @@ public class OnlineShopMain implements Command {
             System.out.println(e.getMessage());
             return;
         }
-        System.out.println(productFromStorage.getPrice() * orderQty);
+        System.out.println("$" + productFromStorage.getPrice() * orderQty);
         System.out.println("Do you want to buy this product with this price? Please input 'yes', if you confirm.");
         String yes = scanner.nextLine();
         if (yes.equals("yes")) {
-            System.out.println("Please input your user id");
-            String userId = scanner.nextLine();
-            User userFromStorage = userStorage.getById(userId);
-            if (userFromStorage == null) {
-                System.out.println("User with " + userId + " does not exists");
-                return;
-            }
-            Order order = new Order(OrderIdUtil.generateId(), userFromStorage, productFromStorage, new Date(),
+            Order order = new Order(OrderIdUtil.generateId(), currentUser, productFromStorage, new Date(),
                     productFromStorage.getPrice(), OrderStatus.NEW, orderQty, paymentMethod);
             orderStorage.add(order);
             productFromStorage.setStockQty(productFromStorage.getStockQty() - orderQty);
@@ -191,16 +185,6 @@ public class OnlineShopMain implements Command {
         } else {
             System.out.println("Please input only 'yes'");
         }
-    }
-
-    private static void printMyOrders() {
-        System.out.println("Please input your user id");
-        String userId = scanner.nextLine();
-        User userFromStorage = userStorage.getById(userId);
-        if (userFromStorage == null) {
-            System.out.println("User with " + userId + " does not exist");
-        }
-        orderStorage.printMyOrders(userFromStorage);
     }
 
     private static void cancelOrderById() {
@@ -226,10 +210,11 @@ public class OnlineShopMain implements Command {
         String password = scanner.nextLine();
         User userFromStorage = userStorage.login(email, password);
         if (userFromStorage != null) {
-            if (userFromStorage.getType() == UserType.ADMIN) {
-                adminCommands();
-            } else if (userFromStorage.getType() == UserType.USER) {
+            if (userFromStorage.getType() == UserType.USER) {
+                currentUser = userFromStorage;
                 userCommands();
+            } else if (userFromStorage.getType() == UserType.ADMIN) {
+                adminCommands();
             }
         } else {
             System.out.println("User email or password is incorrect. Please try again.");

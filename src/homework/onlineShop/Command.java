@@ -27,8 +27,8 @@ public interface Command {
 
     static void printUserCommands() {
         System.out.println("Please input " + LOGOUT + " for logout");
-        System.out.println("Please input " + PRINT_PRODUCTS + " for print products");
         System.out.println("Please input " + BUY_PRODUCT + " for buy products");
+        System.out.println("Please input " + PRINT_PRODUCTS + " for print products");
         System.out.println("Please input " + PRINT_MY_ORDERS + " for print your orders");
         System.out.println("Please input " + CANCEL_ORDER_BY_ID + " for cancel order by id");
     }
