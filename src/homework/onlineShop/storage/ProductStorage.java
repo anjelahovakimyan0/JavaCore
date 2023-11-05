@@ -22,6 +22,10 @@ public class ProductStorage {
         }
     }
 
+    public Product[] getAllProducts() {
+        return products;
+    }
+
     public Product getById(String productId) {
         for (int i = 0; i < size; i++) {
             if (products[i].getId().equals(productId)) {

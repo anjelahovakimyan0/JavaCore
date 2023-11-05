@@ -2,6 +2,7 @@ package homework.onlineShop.storage;
 
 import homework.onlineShop.model.OrderStatus;
 import homework.onlineShop.model.Order;
+import homework.onlineShop.model.Product;
 import homework.onlineShop.model.User;
 
 public class OrderStorage {
@@ -56,7 +57,7 @@ public class OrderStorage {
 
     public void changeOrderStatus() {
         for (int i = 0; i < size; i++) {
-            if(orders[i].getOrderStatus().equals(OrderStatus.DELIVERED)) {
+            if (orders[i].getOrderStatus().equals(OrderStatus.NEW)) {
                 orders[i].setOrderStatus(OrderStatus.DELIVERED);
             }
         }

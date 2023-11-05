@@ -174,17 +174,14 @@ public class OnlineShopMain implements Command {
             System.out.println(e.getMessage());
             return;
         }
-        System.out.println("$" + productFromStorage.getPrice() * orderQty);
-        System.out.println("Do you want to buy this product with this price? Please input 'yes', if you confirm.");
+        System.out.println("If you want to buy this product with this price " + "$" + productFromStorage.getPrice() * orderQty + ", please input 'yes', otherwise 'no'");
         String yes = scanner.nextLine();
         if (yes.equals("yes")) {
             Order order = new Order(OrderIdUtil.generateId(), currentUser, productFromStorage, new Date(),
                     productFromStorage.getPrice(), OrderStatus.NEW, orderQty, paymentMethod);
             orderStorage.add(order);
             productFromStorage.setStockQty(productFromStorage.getStockQty() - orderQty);
-            System.out.println("The products are purchased");
-        } else {
-            System.out.println("Please input only 'yes'");
+            System.out.println("Order succeed.");
         }
     }
 
@@ -209,7 +206,7 @@ public class OnlineShopMain implements Command {
         String email = scanner.nextLine();
         System.out.println("Please input user password");
         String password = scanner.nextLine();
-        User userFromStorage = userStorage.login(email, password);
+        User userFromStorage = userStorage.verifyLogin(email, password);
         if (userFromStorage != null) {
             if (userFromStorage.getType() == UserType.USER) {
                 currentUser = userFromStorage;

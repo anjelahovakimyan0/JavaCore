@@ -23,7 +23,7 @@ public class UserStorage {
         return null;
     }
 
-    public User login(String email, String password) {
+    public User verifyLogin(String email, String password) {
         for (int i = 0; i < size; i++) {
             if (users[i].getEmail().equals(email) && users[i].getPassword().equals(password)) {
                 return users[i];
