@@ -3,8 +3,11 @@ package homework.onlineShop.storage;
 import homework.onlineShop.model.ProductType;
 import homework.onlineShop.exception.OutOfStockException;
 import homework.onlineShop.model.Product;
+import homework.onlineShop.util.StorageSerializeUtil;
 
-public class ProductStorage {
+import java.io.Serializable;
+
+public class ProductStorage implements Serializable {
 
     private Product[] products = new Product[10];
     private int size;
@@ -14,16 +17,13 @@ public class ProductStorage {
             extend();
         }
         products[size++] = product;
+        StorageSerializeUtil.serializeProductStorage(this);
     }
 
     public void printProducts() {
         for (int i = 0; i < size; i++) {
             System.out.println(products[i]);
         }
-    }
-
-    public Product[] getAllProducts() {
-        return products;
     }
 
     public Product getById(String productId) {
@@ -44,19 +44,7 @@ public class ProductStorage {
                 size--;
             }
         }
-    }
-
-    public void deleteProducts(int count, ProductType type) {
-        while (count != 0) {
-            for (int i = 0; i < size; i++) {
-                if (products[i].getType().equals(type)) {
-                    for (int j = i + 1; j < size; j++) {
-                        products[j - 1] = products[j];
-                    }
-                    size--;
-                }
-            }
-        }
+        StorageSerializeUtil.serializeProductStorage(this);
     }
 
     public void checkStockQty(double stockQty, ProductType type) throws OutOfStockException {

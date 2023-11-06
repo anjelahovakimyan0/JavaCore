@@ -1,8 +1,11 @@
 package homework.onlineShop.storage;
 
 import homework.onlineShop.model.User;
+import homework.onlineShop.util.StorageSerializeUtil;
 
-public class UserStorage {
+import java.io.Serializable;
+
+public class UserStorage implements Serializable {
 
     private User[] users = new User[10];
     private int size;
@@ -12,6 +15,7 @@ public class UserStorage {
             extend();
         }
         users[size++] = user;
+        StorageSerializeUtil.serializeUserStorage(this);
     }
 
     public User getById(String id) {
@@ -23,6 +27,12 @@ public class UserStorage {
         return null;
     }
 
+    public void printUsers() {
+        for (int i = 0; i < size; i++) {
+            System.out.println(users[i]);
+        }
+    }
+
     public User verifyLogin(String email, String password) {
         for (int i = 0; i < size; i++) {
             if (users[i].getEmail().equals(email) && users[i].getPassword().equals(password)) {
@@ -30,12 +40,6 @@ public class UserStorage {
             }
         }
         return null;
-    }
-
-    public void printUsers() {
-        for (int i = 0; i < size; i++) {
-            System.out.println(users[i]);
-        }
     }
 
     private void extend() {
