@@ -225,11 +225,13 @@ public class OnlineShopMain implements Command {
             if (yes.equals("yes")) {
                 order = new Order(OrderIdUtil.generateId(), currentUser, productFromStorage, new Date(),
                         productFromStorage.getPrice(), OrderStatus.NEW, orderQty, paymentMethod);
-                productStorage.checkStockQty(orderQty, productFromStorage.getType());
                 orderStorage.add(order);
+                productStorage.checkStockQty(orderQty, productFromStorage.getType());
                 productFromStorage.setStockQty(productFromStorage.getStockQty() - orderQty);
                 StorageSerializeUtil.serializeProductStorage(productStorage);
                 System.out.println("Order succeed.");
+            } else {
+                System.out.println("You don't want to buy the products");
             }
         } catch (OutOfStockException e) {
             order.setOrderStatus(OrderStatus.CANCELED);
@@ -246,12 +248,16 @@ public class OnlineShopMain implements Command {
             System.out.println("Order with " + orderId + " id does not exists");
             return;
         }
-        try {
-            orderFromStorage.setOrderStatus(OrderStatus.CANCELED);
-            StorageSerializeUtil.serializeOrderStorage(orderStorage);
-            System.out.println("Order canceled!");
-        } catch (NullPointerException e) {
-            System.out.println("You don't have any orders");
+        if (orderFromStorage.getUser().equals(currentUser)) {
+            try {
+                orderFromStorage.setOrderStatus(OrderStatus.CANCELED);
+                StorageSerializeUtil.serializeOrderStorage(orderStorage);
+                System.out.println("Order canceled!");
+            } catch (NullPointerException e) {
+                System.out.println("You don't have any orders");
+            }
+        } else {
+            System.out.println("Invalid order id. PLease try again");
         }
     }
 
