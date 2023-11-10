@@ -9,8 +9,11 @@ public class FileExample {
     public static void main(String[] args) throws IOException {
         String filePath = "C:\\Users\\sky\\IdeaProjects\\JavaCore0\\src\\classwork\\chapter13\\test\\folder";
         String filePathTxt = "C:\\Users\\sky\\IdeaProjects\\JavaCore0\\src\\classwork\\chapter13\\test\\newFile.txt";
-        File fileTxt = new File(filePathTxt);
+        File fileTxt = new File("C:\\Users\\sky\\IdeaProjects\\JavaCore0\\src\\classwork\\chapter13\\test", "newFile.txt");
         fileTxt.setLastModified(213246);
+        if (fileTxt.isFile()) {
+            System.out.println("mjjknj");
+        }
         File fileDir = new File(filePath + File.separator + "newFolder\\a\\b");
 
         File file1Dir = new File(filePath + File.separator + "newFolder1");

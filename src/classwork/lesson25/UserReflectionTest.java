@@ -3,7 +3,7 @@ package classwork.lesson25;
 import classwork.lesson24.User;
 import classwork.lesson25.annotation.FirstAnnotation;
 import classwork.lesson25.annotation.Model;
-import homework.onlineShop.model.Language;
+import homework.onlineStore.model.enums.Language;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

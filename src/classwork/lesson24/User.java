@@ -2,7 +2,7 @@ package classwork.lesson24;
 
 import classwork.lesson25.annotation.FirstAnnotation;
 import classwork.lesson25.annotation.Model;
-import homework.onlineShop.model.Language;
+import homework.onlineStore.model.enums.Language;
 
 @Model(name = "User", val = 5)
 public class User {

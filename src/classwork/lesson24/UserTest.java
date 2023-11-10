@@ -1,6 +1,6 @@
 package classwork.lesson24;
 
-import homework.onlineShop.model.Language;
+import homework.onlineStore.model.enums.Language;
 
 public class UserTest {
 
