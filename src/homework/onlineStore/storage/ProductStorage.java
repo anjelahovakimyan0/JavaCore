@@ -1,9 +1,8 @@
-package homework.onlineShop.storage;
+package homework.onlineStore.storage;
 
-import homework.onlineShop.model.ProductType;
-import homework.onlineShop.exception.OutOfStockException;
-import homework.onlineShop.model.Product;
-import homework.onlineShop.util.StorageSerializeUtil;
+import homework.onlineStore.model.Product;
+import homework.onlineStore.model.enums.ProductType;
+import homework.onlineStore.util.StorageSerializeUtil;
 
 import java.io.Serializable;
 
@@ -20,15 +19,17 @@ public class ProductStorage implements Serializable {
         StorageSerializeUtil.serializeProductStorage(this);
     }
 
-    public void printProducts() {
+    public void print() {
         for (int i = 0; i < size; i++) {
-            System.out.println(products[i]);
+            if (!products[i].isRemoved()) {
+                System.out.println(products[i]);
+            }
         }
     }
 
     public Product getById(String productId) {
         for (int i = 0; i < size; i++) {
-            if (products[i].getId().equals(productId)) {
+            if (products[i].getId().equals(productId) && !products[i].isRemoved()) {
                 return products[i];
             }
         }
@@ -45,14 +46,6 @@ public class ProductStorage implements Serializable {
             }
         }
         StorageSerializeUtil.serializeProductStorage(this);
-    }
-
-    public void checkStockQty(double stockQty, ProductType type) throws OutOfStockException {
-        for (int i = 0; i < size; i++) {
-            if (products[i].getType().equals(type) && products[i].getStockQty() < stockQty) {
-                throw new OutOfStockException("This amount of products are not available now. Please buy less.");
-            }
-        }
     }
 
     private void extend() {

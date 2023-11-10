@@ -1,9 +1,8 @@
-package homework.onlineShop.storage;
+package homework.onlineStore.storage;
 
-import homework.onlineShop.model.Order;
-import homework.onlineShop.model.OrderStatus;
-import homework.onlineShop.model.User;
-import homework.onlineShop.util.StorageSerializeUtil;
+import homework.onlineStore.model.Order;
+import homework.onlineStore.model.User;
+import homework.onlineStore.util.StorageSerializeUtil;
 
 import java.io.Serializable;
 
@@ -26,9 +25,9 @@ public class OrderStorage implements Serializable {
         }
     }
 
-    public void printMyOrders(User user) {
+    public void printByUser(User currentUser) {
         for (int i = 0; i < size; i++) {
-            if (orders[i].getUser().equals(user)) {
+            if (orders[i].getUser().equals(currentUser)) {
                 System.out.println(orders[i]);
             }
         }
@@ -41,11 +40,6 @@ public class OrderStorage implements Serializable {
             }
         }
         return null;
-    }
-
-    public void changeOrderStatus(Order order, OrderStatus orderStatus) {
-        order.setOrderStatus(orderStatus);
-        StorageSerializeUtil.serializeOrderStorage(this);
     }
 
     private void extend() {

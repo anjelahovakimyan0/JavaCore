@@ -1,16 +1,16 @@
-package homework.onlineShop.util;
+package homework.onlineStore.util;
 
-import homework.onlineShop.storage.OrderStorage;
-import homework.onlineShop.storage.ProductStorage;
-import homework.onlineShop.storage.UserStorage;
+import homework.onlineStore.storage.OrderStorage;
+import homework.onlineStore.storage.ProductStorage;
+import homework.onlineStore.storage.UserStorage;
 
 import java.io.*;
 
 public abstract class StorageSerializeUtil {
 
-    private static final String PRODUCT_FILE_PATH = "C:\\Users\\sky\\IdeaProjects\\JavaCore0\\src\\homework\\onlineShop\\data\\productStorage.dat";
-    private static final String ORDER_FILE_PATH = "C:\\Users\\sky\\IdeaProjects\\JavaCore0\\src\\homework\\onlineShop\\data\\orderStorage.dat";
-    private static final String USER_FILE_PATH = "C:\\Users\\sky\\IdeaProjects\\JavaCore0\\src\\homework\\onlineShop\\data\\userStorage.dat";
+    private static final String PRODUCT_FILE_PATH = "C:\\Users\\sky\\IdeaProjects\\JavaCore0\\src\\homework\\onlineStore\\data\\productStorage.txt";
+    private static final String ORDER_FILE_PATH = "C:\\Users\\sky\\IdeaProjects\\JavaCore0\\src\\homework\\onlineStore\\data\\orderStorage.txt";
+    private static final String USER_FILE_PATH = "C:\\Users\\sky\\IdeaProjects\\JavaCore0\\src\\homework\\onlineStore\\data\\userStorage.txt";
 
     public static void serializeProductStorage(ProductStorage productStorage) {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(PRODUCT_FILE_PATH))) {

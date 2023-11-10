@@ -1,4 +1,6 @@
-package homework.onlineShop.model;
+package homework.onlineStore.model;
+
+import homework.onlineStore.model.enums.UserType;
 
 import java.io.Serializable;
 
@@ -78,7 +80,7 @@ public class User implements Serializable {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", password='******'" +
                 ", type=" + type +
                 '}';
     }

@@ -1,4 +1,6 @@
-package homework.onlineShop.model;
+package homework.onlineStore.model;
+
+import homework.onlineStore.model.enums.ProductType;
 
 import java.io.Serializable;
 
@@ -10,6 +12,7 @@ public class Product implements Serializable {
     private double price;
     private int stockQty;
     private ProductType type;
+    private boolean isRemoved = false;
 
     public Product() {
     }
@@ -69,6 +72,14 @@ public class Product implements Serializable {
 
     public void setType(ProductType type) {
         this.type = type;
+    }
+
+    public boolean isRemoved() {
+        return isRemoved;
+    }
+
+    public void setRemoved(boolean removed) {
+        isRemoved = removed;
     }
 
     @Override

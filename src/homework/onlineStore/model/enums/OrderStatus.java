@@ -1,4 +1,4 @@
-package homework.onlineShop.model;
+package homework.onlineStore.model.enums;
 
 public enum OrderStatus {
 
