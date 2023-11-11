@@ -102,8 +102,10 @@ public class FileUtil {
         String content = SCANNER.nextLine();
         File file = new File(folderPath + File.separator + fileName);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
-            file.createNewFile();
-            bufferedWriter.write(content);
+            if (!file.exists()) {
+                file.createNewFile();
+                bufferedWriter.write(content);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
