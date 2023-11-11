@@ -13,6 +13,7 @@ public class FileUtil {
         findLines();
         printSizeOfPackage();
         createFileWithContent();
+        ContentSearchWithRecursion.content();
     }
 
     static void fileSearch() {
