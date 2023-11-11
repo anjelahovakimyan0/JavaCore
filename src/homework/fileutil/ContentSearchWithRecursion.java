@@ -8,11 +8,11 @@ import java.io.IOException;
 public class ContentSearchWithRecursion {
 
     private static final String FOLDER_PATH = "C:\\Users\\sky\\IdeaProjects\\JavaCore0\\src\\homework\\fileutil\\file";
+    static final File FILE = new File(FOLDER_PATH);
     private static String keyword = "Anjela";
 
     static File file1 = null;
     static File file = new File(FOLDER_PATH);
-    static final File FILE = new File(FOLDER_PATH);
     static String fileName;
 
     static void content() {
