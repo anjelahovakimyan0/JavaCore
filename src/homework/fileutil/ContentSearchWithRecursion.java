@@ -12,7 +12,7 @@ public class ContentSearchWithRecursion {
     private static String keyword = "Anjela";
 
     static File file1 = null;
-    static File file = new File(FOLDER_PATH);
+    static File file = FILE;
     static String fileName;
 
     static void content() {
