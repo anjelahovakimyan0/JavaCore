@@ -31,7 +31,7 @@ public class ContentSearchWithRecursion {
                             file = new File(FOLDER_PATH + File.separator + fileName);
                             content();
                         } else {
-                            file = new File(FOLDER_PATH + File.separator + fileName + file1);
+                            file = new File(FOLDER_PATH + File.separator + fileName + file1.getName());
                             if (file1.toString().endsWith(".txt")) {
                                 try {
                                     BufferedReader bufferedReader = new BufferedReader(new FileReader(file1));
