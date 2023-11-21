@@ -16,17 +16,17 @@ public class Menu {
             choice = (char) System.in.read();
         } while (choice < '1' || choice > '5');
 
-        System.out.println("\n");
+        System.out.print("\n");
 
         switch (choice) {
             case '1':
                 System.out.println("if:\n");
-                System.out.println("if(условие) оператор;");
+                System.out.println("if (условие) оператор;");
                 System.out.println("else оператор;");
                 break;
             case '2':
                 System.out.println("switch:\n");
-                System.out.println("switch(выражение) {");
+                System.out.println("switch (выражение) {");
                 System.out.println(" case константа:");
                 System.out.println(" последовательность операторов");
                 System.out.println(" break;");
@@ -35,7 +35,7 @@ public class Menu {
                 break;
             case '3':
                 System.out.println("while:\n");
-                System.out.println("while(условие) оператор;");
+                System.out.println("while (условие) оператор;");
                 break;
             case '4':
                 System.out.println("do-while:\n");
@@ -45,7 +45,7 @@ public class Menu {
                 break;
             case '5':
                 System.out.println("for:\n");
-                System.out.print("for(инициализация; условие; итерация)");
+                System.out.print("for (инициализация; условие; итерация)");
                 System.out.println(" оператор;");
                 break;
         }

@@ -7,7 +7,7 @@ public class NoChange {
 
         for (int x : nums) {
             System.out.print(x + " ");
-            x = x * 10;
+            x *= 10;
         }
 
         System.out.println();
