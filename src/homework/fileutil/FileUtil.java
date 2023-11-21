@@ -8,13 +8,11 @@ public class FileUtil {
         File filePath = new File(path);
         if (filePath.isDirectory()) {
             File[] files = filePath.listFiles();
-            if (files != null) {
-                for (File file : files) {
-                    if (file.isFile() && file.getName().equals(fileName)) {
-                        System.out.println(true);
-                    } else if (file.isDirectory()) {
-                        fileSearch(file.getAbsolutePath(), fileName);
-                    }
+            for (File file : files) {
+                if (file.isFile() && file.getName().equals(fileName)) {
+                    System.out.println(true);
+                } else if (file.isDirectory()) {
+                    fileSearch(file.getAbsolutePath(), fileName);
                 }
             }
         }
@@ -67,25 +65,24 @@ public class FileUtil {
         }
     }
 
-    static void printSizeOfPackage(String path) {
+    static long printSizeOfPackage(String path) {
+        long sizeOfPackage = 0;
         File filePath = new File(path);
         if (filePath.isDirectory()) {
             File[] files = filePath.listFiles();
             if (files != null) {
                 for (File file : files) {
                     if (file.isFile()) {
-                        long sizeOfPackage = 0;
                         for (File fileWithSize : files) {
                             sizeOfPackage += fileWithSize.length();
                         }
-                        System.out.println(sizeOfPackage);
-                        break;
                     } else if (file.isDirectory()) {
                         printSizeOfPackage(file.getAbsolutePath());
                     }
                 }
             }
         }
+        return sizeOfPackage;
     }
 
     static void createFileWithContent(String path, String fileName, String content) {
