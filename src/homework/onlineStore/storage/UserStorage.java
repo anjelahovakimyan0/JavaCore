@@ -5,58 +5,32 @@ import homework.onlineStore.model.enums.UserType;
 import homework.onlineStore.util.StorageSerializeUtil;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserStorage implements Serializable {
 
-    private User[] users = new User[10];
-    private int size;
+    private Map<String, User> userMap = new HashMap<>();
 
     public void register(User user) {
-        if (size == users.length) {
-            extend();
-        }
-        users[size++] = user;
+        userMap.put(user.getEmail(), user);
         StorageSerializeUtil.serializeUserStorage(this);
     }
 
-    public User getById(String id) {
-        for (int i = 0; i < size; i++) {
-            if (users[i].getId().equals(id)) {
-                return users[i];
-            }
-        }
-        return null;
-    }
-
-    public User verifyLogin(String email, String password) {
-        for (int i = 0; i < size; i++) {
-            if (users[i].getEmail().equals(email) && users[i].getPassword().equals(password)) {
-                return users[i];
-            }
-        }
-        return null;
-    }
-
     public User getByEmail(String email) {
-        for (int i = 0; i < size; i++) {
-            if (users[i].getEmail().equals(email)) {
-                return users[i];
+        for (String key : userMap.keySet()) {
+            if (key.equals(email)) {
+                return userMap.get(key);
             }
         }
         return null;
     }
-    
+
     public void printByType(UserType userType) {
-        for (int i = 0; i < size; i++) {
-            if (users[i].getType().equals(userType)) {
-                System.out.println(users[i]);
+        for (User user : userMap.values()) {
+            if (user.getType().equals(userType)) {
+                System.out.println(user);
             }
         }
-    }
-    
-    private void extend() {
-        User[] tmp = new User[users.length + 10];
-        System.arraycopy(users, 0, tmp, 0, users.length);
-        users = tmp;
     }
 }

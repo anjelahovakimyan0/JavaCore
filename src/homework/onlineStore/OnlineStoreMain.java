@@ -12,7 +12,7 @@ import homework.onlineStore.util.*;
 import java.util.Date;
 import java.util.Scanner;
 
-public class OnlineShopMain implements Command {
+public class OnlineStoreMain implements Command {
 
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final UserStorage USER_STORAGE = StorageSerializeUtil.deserializeUserStorage();

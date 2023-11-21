@@ -24,7 +24,7 @@ public class ContentSearchWithRecursion {
                         file1 = files[i];
                         if (files[i].isDirectory()) {
                             if (fileName != null) {
-                                fileName = fileName + file1.getName() + File.separator;
+                                fileName += file1.getName() + File.separator;
                             } else {
                                 fileName = file1.getName() + File.separator;
                             }
