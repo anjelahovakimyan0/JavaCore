@@ -26,11 +26,13 @@ public class FileUtil {
                 if (file.isFile() && file.toString().endsWith(".txt")) {
                     try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
                         String line;
+                        int lineNumber = 1;
                         while ((line = bufferedReader.readLine()) != null) {
                             if (line.contains(keyword)) {
-                                System.out.println(file.getName());
+                                System.out.println(file.getName() + ", lineNumber: " + lineNumber + ", line: " + line);
                                 break;
                             }
+                            lineNumber++;
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
