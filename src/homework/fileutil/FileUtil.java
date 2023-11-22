@@ -4,6 +4,16 @@ import java.io.*;
 
 public class FileUtil {
 
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+
     static void fileSearch(String path, String fileName) {
         File filePath = new File(path);
         if (filePath.isDirectory()) {
@@ -29,7 +39,9 @@ public class FileUtil {
                         int lineNumber = 1;
                         while ((line = bufferedReader.readLine()) != null) {
                             if (line.contains(keyword)) {
-                                System.out.println(file.getName() + ", lineNumber: " + lineNumber + ", line: " + line);
+                                System.out.println(ANSI_GREEN + file.getName()
+                                        + ANSI_YELLOW + " line number: " + lineNumber
+                                        + ANSI_PURPLE + " line: " + line + ANSI_RESET);
                                 break;
                             }
                             lineNumber++;

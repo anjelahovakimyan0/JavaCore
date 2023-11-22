@@ -10,24 +10,24 @@ import java.util.Map;
 
 public class UserStorage implements Serializable {
 
-    private Map<String, User> userMap = new HashMap<>();
+    private Map<String, User> users = new HashMap<>();
 
     public void register(User user) {
-        userMap.put(user.getEmail(), user);
+        users.put(user.getEmail(), user);
         StorageSerializeUtil.serializeUserStorage(this);
     }
 
     public User getByEmail(String email) {
-        for (String key : userMap.keySet()) {
+        for (String key : users.keySet()) {
             if (key.equals(email)) {
-                return userMap.get(key);
+                return users.get(key);
             }
         }
         return null;
     }
 
     public void printByType(UserType userType) {
-        for (User user : userMap.values()) {
+        for (User user : users.values()) {
             if (user.getType().equals(userType)) {
                 System.out.println(user);
             }

@@ -120,10 +120,8 @@ public class OnlineStoreMain implements Command {
         currentUser = user;
         if (user.getType() == UserType.USER) {
             userCommands();
-        } else if (user.getType() == UserType.ADMIN) {
-            adminCommands();
         } else {
-            System.out.println("User type is incorrect. Please try again.");
+            adminCommands();
         }
     }
 
