@@ -9,7 +9,7 @@ public class FileAnalyzer {
 
     public Map<String, Integer> wordMap(String path) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            Map<String, Integer> wordMap = new HashMap<>();
+            Map<String, Integer> wordMap = new LinkedHashMap<>();
             List<String> arrayList = new ArrayList<>();
             String line, word;
             int count;
@@ -63,16 +63,13 @@ public class FileAnalyzer {
 
     public Map<String, Integer> topFrequentWords(String path, int n) throws IOException {
         Map<String, Integer> stringIntegerMap = wordMap(path);
-        Map<String, Integer> linkedHashMap = new LinkedHashMap<>();
         List<Map.Entry<String, Integer>> list = new LinkedList<>(stringIntegerMap.entrySet());
         list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+        stringIntegerMap.clear();
         for (int i = 0; i < n; i++) {
-            for (int j = i; j < list.size(); j++) {
-                linkedHashMap.put(list.get(j).getKey(), list.get(j).getValue());
-                break;
-            }
+            stringIntegerMap.put(list.get(i).getKey(), list.get(i).getValue());
         }
-        return linkedHashMap;
+        return stringIntegerMap;
     }
 
     public int countWordOccurrences(String path, String word) throws IOException {
