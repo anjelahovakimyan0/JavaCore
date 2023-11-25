@@ -1,8 +1,11 @@
 package homework.fileAnalyzer;
 
+import homework.fileAnalyzer.exception.CustomException;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.util.*;
 
 public class FileAnalyzer {
@@ -27,6 +30,8 @@ public class FileAnalyzer {
                 }
             }
             return wordMap;
+        } catch (IOException e) {
+            throw new CustomException(e);
         }
     }
 
@@ -41,6 +46,8 @@ public class FileAnalyzer {
                 }
             }
             return count;
+        } catch (IOException e) {
+            throw new CustomException(e);
         }
     }
 
@@ -58,6 +65,8 @@ public class FileAnalyzer {
                 }
             }
             return count;
+        } catch (IOException e) {
+            throw new CustomException(e);
         }
     }
 
@@ -88,6 +97,8 @@ public class FileAnalyzer {
                 }
             }
             return count;
+        } catch (IOException e) {
+            throw new CustomException(e);
         }
     }
 }

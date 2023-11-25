@@ -1,5 +1,7 @@
 package homework.fileAnalyzer;
 
+import homework.fileAnalyzer.exception.CustomException;
+
 import java.io.IOException;
 import java.util.Map;
 
