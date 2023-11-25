@@ -20,6 +20,8 @@ public class FileAnalyzerMain {
 
             System.out.println("Count of unique words = " + fileAnalyzer.uniqueWordCount(FILE_PATH));
 
+            System.out.println("Top frequent words " + fileAnalyzer.topFrequentWords(FILE_PATH, 3));
+
             System.out.println("Count of given word = " + fileAnalyzer.countWordOccurrences(FILE_PATH, "hello"));
         } catch (IOException e) {
             System.out.println("Something went wrong. \n" + e);

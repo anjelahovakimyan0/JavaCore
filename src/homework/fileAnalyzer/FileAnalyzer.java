@@ -18,10 +18,10 @@ public class FileAnalyzer {
                 arrayList.addAll(List.of(words));
             }
             for (int i = 0; i < arrayList.size(); i++) {
-                count = 1;
+                count = 0;
                 word = arrayList.get(i);
                 for (int j = 0; j < arrayList.size(); j++) {
-                    if (arrayList.get(j).contains(word)) {
+                    if (arrayList.get(j).equals(word)) {
                         wordMap.put(word, ++count);
                     }
                 }
@@ -58,6 +58,38 @@ public class FileAnalyzer {
                 }
             }
             return count;
+        }
+    }
+
+    public Map<String, Integer> topFrequentWords(String path, int n) throws IOException {
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            Map<String, Integer> wordMap = new HashMap<>();
+            List<String> arrayList = new ArrayList<>();
+            String line, word;
+            int count;
+            while ((line = br.readLine()) != null) {
+                String[] words = line.split(",");
+                arrayList.addAll(List.of(words));
+            }
+            for (int i = 0; i < arrayList.size(); i++) {
+                count = 0;
+                word = arrayList.get(i);
+                for (int j = 0; j < arrayList.size(); j++) {
+                    if (arrayList.get(j).equals(word)) {
+                        wordMap.put(word, ++count);
+                    }
+                }
+            }
+            Map<String, Integer> linkedHashMap = new LinkedHashMap<>();
+            List<Map.Entry<String, Integer>> list = new LinkedList<>(wordMap.entrySet());
+            list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+            for (int i = 0; i < n; i++) {
+                for (int j = i; j < list.size(); j++) {
+                    linkedHashMap.put(list.get(j).getKey(), list.get(j).getValue());
+                    break;
+                }
+            }
+            return linkedHashMap;
         }
     }
 
