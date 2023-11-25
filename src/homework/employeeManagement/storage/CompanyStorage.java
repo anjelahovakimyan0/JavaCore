@@ -2,6 +2,8 @@ package homework.employeeManagement.storage;
 
 import homework.employeeManagement.model.Company;
 
+import java.util.LinkedList;
+
 public class CompanyStorage {
 
     private Company[] companies = new Company[10];

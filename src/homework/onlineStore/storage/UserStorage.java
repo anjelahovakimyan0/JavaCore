@@ -18,17 +18,12 @@ public class UserStorage implements Serializable {
     }
 
     public User getByEmail(String email) {
-        for (String key : users.keySet()) {
-            if (key.equals(email)) {
-                return users.get(key);
-            }
-        }
-        return null;
+        return users.get(email);
     }
 
     public void printByType(UserType userType) {
         for (User user : users.values()) {
-            if (user.getType().equals(userType)) {
+            if (user.getType() == userType) {
                 System.out.println(user);
             }
         }

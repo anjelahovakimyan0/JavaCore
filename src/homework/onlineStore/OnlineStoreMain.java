@@ -95,7 +95,7 @@ public class OnlineStoreMain implements Command {
                     USER_STORAGE.printByType(UserType.USER);
                     break;
                 case PRINT_ORDERS:
-                    ORDER_STORAGE.printOrders();
+                    ORDER_STORAGE.print();
                     break;
                 case CHANGE_ORDER_STATUS_BY_ID:
                     changeOrderStatus();
@@ -179,7 +179,7 @@ public class OnlineStoreMain implements Command {
             System.out.println("Product with " + productId + " does not exists");
             return;
         }
-        product.setRemoved(true);
+        PRODUCT_STORAGE.delete(productId);
         StorageSerializeUtil.serializeProductStorage(PRODUCT_STORAGE);
         System.out.println("Product removed");
     }
@@ -243,7 +243,7 @@ public class OnlineStoreMain implements Command {
     }
 
     private static void changeOrderStatus() {
-        ORDER_STORAGE.printOrders();
+        ORDER_STORAGE.print();
         System.out.println("Please input order id");
         String orderId = SCANNER.nextLine();
         System.out.println("Please input new order status(NEW, DELIVERED, CANCELED)");

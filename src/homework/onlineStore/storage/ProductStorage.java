@@ -5,6 +5,7 @@ import homework.onlineStore.util.StorageSerializeUtil;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class ProductStorage implements Serializable {
 
@@ -17,18 +18,35 @@ public class ProductStorage implements Serializable {
 
     public void print() {
         for (Product product : products) {
-            if (!product.isRemoved()) {
-                System.out.println(product);
-            }
+            System.out.println(product);
         }
     }
 
     public Product getById(String productId) {
         for (Product product : products) {
-            if (product.getId().equals(productId) && !product.isRemoved()) {
+            if (product.getId().equals(productId)) {
                 return product;
             }
         }
         return null;
+    }
+
+    public void delete(String productId) {
+//        for (Product product : products) {
+//            if (product.getId().equals(productId)) {
+//                products.remove(product);
+//                break;
+//            }
+//        }
+
+//        products.removeIf(next -> next.getId().equals(productId));
+
+        Iterator<Product> iterator = products.iterator();
+        while (iterator.hasNext()) {
+            Product next = iterator.next();
+            if (next.getId().equals(productId)) {
+                iterator.remove();
+            }
+        }
     }
 }

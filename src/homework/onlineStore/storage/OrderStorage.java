@@ -17,7 +17,7 @@ public class OrderStorage implements Serializable {
         StorageSerializeUtil.serializeOrderStorage(this);
     }
 
-    public void printOrders() {
+    public void print() {
         for (Order order : orders) {
             System.out.println(order);
         }
