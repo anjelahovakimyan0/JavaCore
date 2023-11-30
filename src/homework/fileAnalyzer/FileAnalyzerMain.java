@@ -11,16 +11,20 @@ public class FileAnalyzerMain {
         FileAnalyzer fileAnalyzer = new FileAnalyzer();
 
         try {
-            Map<String, Integer> wordMap = fileAnalyzer.wordMap(FILE_PATH);
-            for (String key : wordMap.keySet()) {
-                System.out.println(key + " -> " + wordMap.get(key));
+            Map<String, Integer> stringIntegerMap = fileAnalyzer.wordMap(FILE_PATH);
+            for (String key : stringIntegerMap.keySet()) {
+                System.out.println(key + " -> " + stringIntegerMap.get(key));
             }
 
             System.out.println("Total count of words = " + fileAnalyzer.totalWordCount(FILE_PATH));
 
             System.out.println("Count of unique words = " + fileAnalyzer.uniqueWordCount(FILE_PATH));
 
-            System.out.println("Top frequent words " + fileAnalyzer.topFrequentWords(FILE_PATH, 3));
+            System.out.println("Top frequent words");
+            Map<String, Integer> stringIntegerMap1 = fileAnalyzer.topFrequentWords(FILE_PATH, 3);
+            for (Map.Entry<String, Integer> stringIntegerEntry : stringIntegerMap1.entrySet()) {
+                System.out.println(stringIntegerEntry.getKey() + " -> " + stringIntegerEntry.getValue());
+            }
 
             System.out.println("Count of given word = " + fileAnalyzer.countWordOccurrences(FILE_PATH, "hello"));
         } catch (IOException e) {

@@ -9,82 +9,72 @@ public class FileAnalyzer {
 
     public Map<String, Integer> wordMap(String path) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            Map<String, Integer> wordMap = new LinkedHashMap<>();
-            List<String> arrayList = new ArrayList<>();
-            String line, word;
-            int count;
+            Map<String, Integer> resultMap = new LinkedHashMap<>();
+            String line;
             while ((line = br.readLine()) != null) {
-                String[] words = line.split(",");
-                arrayList.addAll(List.of(words));
-            }
-            for (int i = 0; i < arrayList.size(); i++) {
-                count = 0;
-                word = arrayList.get(i);
-                for (int j = 0; j < arrayList.size(); j++) {
-                    if (arrayList.get(j).equals(word)) {
-                        wordMap.put(word, ++count);
+                String[] words = line.replaceAll(",", "")
+                        .replaceAll(";", "")
+                        .replaceAll("\\.", "")
+                        .split(" ");
+                for (String word : words) {
+                    if (!word.trim().isEmpty()) {
+                        if (resultMap.containsKey(word)) {
+                            Integer count = resultMap.get(word);
+                            resultMap.put(word, ++count);
+                        } else {
+                            resultMap.put(word, 1);
+                        }
                     }
                 }
             }
-            return wordMap;
+            return resultMap;
         }
     }
 
     public int totalWordCount(String path) throws IOException {
+        Map<String, Integer> stringIntegerMap = wordMap(path);
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            String line;
             int count = 0;
-            while ((line = br.readLine()) != null) {
-                String[] words = line.split(",");
-                for (int i = 0; i < words.length; i++) {
-                    count++;
-                }
+            for (Integer value : stringIntegerMap.values()) {
+                count += value;
             }
             return count;
         }
     }
 
     public int uniqueWordCount(String path) throws IOException {
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            Set<String> wordSet = new HashSet<>();
-            String line;
-            int count = 0;
-            while ((line = br.readLine()) != null) {
-                String[] words = line.split(",");
-                for (String word : words) {
-                    if (wordSet.add(word)) {
-                        count++;
-                    }
-                }
+        Map<String, Integer> stringIntegerMap = wordMap(path);
+        int count = 0;
+        for (Integer value : stringIntegerMap.values()) {
+            if (value == 1) {
+                count++;
             }
-            return count;
         }
+        return count;
     }
 
     public Map<String, Integer> topFrequentWords(String path, int n) throws IOException {
-        Map<String, Integer> stringIntegerMap = wordMap(path);
-        List<Map.Entry<String, Integer>> list = new LinkedList<>(stringIntegerMap.entrySet());
-        list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
-        stringIntegerMap.clear();
+        Map<String, Integer> wordMap = wordMap(path);
+        List<Map.Entry<String, Integer>> entries = new ArrayList<>(wordMap.entrySet());
+        entries.sort(new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                return o2.getValue().compareTo(o1.getValue());
+            }
+        });
+        HashMap<String, Integer> resultMap = new LinkedHashMap<>();
         for (int i = 0; i < n; i++) {
-            stringIntegerMap.put(list.get(i).getKey(), list.get(i).getValue());
+            Map.Entry<String, Integer> stringIntegerEntry = entries.get(i);
+            resultMap.put(stringIntegerEntry.getKey(), stringIntegerEntry.getValue());
         }
-        return stringIntegerMap;
+        return resultMap;
     }
 
     public int countWordOccurrences(String path, String word) throws IOException {
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            String line;
-            int count = 0;
-            while ((line = br.readLine()) != null) {
-                String[] words = line.split(",");
-                for (int i = 0; i < words.length; i++) {
-                    if (words[i].contains(word)) {
-                        count++;
-                    }
-                }
-            }
-            return count;
+        Map<String, Integer> stringIntegerMap = wordMap(path);
+        if (!stringIntegerMap.containsKey(word)) {
+            return 0;
         }
+        return stringIntegerMap.get(word);
     }
 }
